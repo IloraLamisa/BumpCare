@@ -1,0 +1,444 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <title>Bump Care</title>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <meta content="" name="keywords">
+    <meta content="" name="description">
+
+    <!-- Favicon -->
+    <link href="img/favicon.ico" rel="icon">
+
+    <!-- Google Web Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Heebo:wght@400;500&amp;family=Jost:wght@500;600;700&amp;display=swap"
+        rel="stylesheet">
+
+    <!-- Icon Font Stylesheet -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css" rel="stylesheet">
+
+    <!-- Libraries Stylesheet -->
+    <link href="{{ url_for('static', filename='css/animate.min.css')}}" rel="stylesheet">
+    <link href="{{ url_for('static', filename='lib/owlcarousel/assets/owl.carousel.min.css') }} " rel="stylesheet">
+
+    <!-- Customized Bootstrap Stylesheet -->
+    <link href="{{ url_for('static', filename='css/bootstrap.min.css') }}" rel="stylesheet">
+
+    <!-- Template Stylesheet -->
+    <link href="{{ url_for('static', filename='css/style.css') }}" rel="stylesheet">
+    <link rel="manifest" href="{{ url_for('static', filename='manifest.json') }}">
+    <style>
+        .grid-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+            margin: 4rem 2rem;
+        }
+
+        .article-box {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 2rem;
+            background: linear-gradient(to right, #56ccf2, #2f80ed);
+            border-radius: 10px;
+            text-align: center;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            color: white;
+        }
+
+        .article-box img {
+            max-width: 100%;
+            border-radius: 10px;
+            margin-bottom: 1rem;
+            padding: 5%;
+        }
+
+        .article-box:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        .tools-header {
+            text-align: center;
+            margin: 2rem 0;
+        }
+
+        .tools-header h2 {
+            font-family: 'Jost', sans-serif;
+            font-weight: 700;
+            color: #333;
+        }
+
+        .tools-container {
+            margin: 2rem 0;
+            display: flex;
+            justify-content: center;
+        }
+
+        .tools-grid {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+            max-width: 1200px;
+            justify-content: center;
+        }
+
+        .tool-box {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            width: 200px;
+            /* Fixed size for better alignment */
+            transition: transform 0.3s ease;
+        }
+
+        .tool-box:hover {
+            transform: scale(1.05);
+        }
+
+        .icon-container {
+            background: linear-gradient(to right, #aa00a0, #185a9d);
+            border-radius: 10px;
+            padding: 1.5rem;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-bottom: 0.5rem;
+            width: 100px;
+            height: 100px;
+        }
+
+        .icon-container i {
+            font-size: 4rem;
+            color: white;
+        }
+
+        .tool-box p {
+            margin: 0;
+            font-family: 'Heebo', sans-serif;
+            font-size: 1rem;
+            color: #333;
+        }
+
+        /* Media Queries */
+        @media (max-width: 768px) {
+            .grid-container {
+                grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            }
+
+            .article-box {
+                padding: 1.5rem;
+            }
+
+            .tool-box {
+                width: 150px;
+            }
+
+            .icon-container {
+                width: 80px;
+                height: 80px;
+            }
+
+            .icon-container i {
+                font-size: 3rem;
+            }
+        }
+
+        @media (max-width: 576px) {
+            .grid-container {
+                grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            }
+
+            .article-box {
+                padding: 1rem;
+            }
+
+            .tool-box {
+                width: 120px;
+            }
+
+            .icon-container {
+                width: 70px;
+                height: 70px;
+            }
+
+            .icon-container i {
+                font-size: 2.5rem;
+            }
+            .img-responsive {
+    max-width: 100%;
+    height: auto;
+}
+
+        }
+    .add-button {
+    display: none;
+    position: fixed;
+    bottom: 10px;
+    right: 10px;
+    padding: 10px 20px;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    transition: background-color 0.3s ease;
+}
+
+.add-button:hover {
+    background-color: #45a049;
+}
+
+    </style>
+</head>
+
+<body data-bs-spy="scroll" data-bs-target=".navbar" data-bs-offset="51">
+    <div class="container-xxl bg-white p-0">
+        <!-- Spinner Start -->
+        <div id="spinner"
+            class="bg-white position-fixed translate-middle w-100 vh-100 top-50 start-50 d-flex align-items-center justify-content-center">
+            <div class="spinner-grow text-primary" style="width: 3rem; height: 3rem;" role="status">
+                <span class="sr-only">Loading...</span>
+            </div>
+        </div>
+        <!-- Spinner End -->
+
+
+        <!-- Navbar & Hero Start -->
+        <div class="container-xxl position-relative p-0" id="home">
+            <nav class="navbar navbar-expand-lg navbar-light px-4 px-lg-5 py-3 py-lg-0 sticky-top shadow-sm">
+                <a href="" class="navbar-brand p-0">
+                    <h1 class="m-0">Bump Care</h1>
+                    <!-- <img src="img/logo.png" alt="Logo"> -->
+                </a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse">
+                    <span class="fa fa-bars"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarCollapse">
+                    <div class="navbar-nav mx-auto py-0">
+                        <a href="/" class="nav-item nav-link">Home</a>
+                        <a href="/start" class="nav-item nav-link">Getting Pregnant</a>
+                        <a href="/week" class="nav-item nav-link">Pregnancy Journey</a>
+                        <a href="/tool" class="nav-item nav-link">Usefull Tools</a>
+                        <a href="/doctor" class="nav-item nav-link">Find Doctors</a>
+                        <a href="/chtbt" class="nav-item nav-link">Our Ai Chatbot</a>
+                    </div>
+                </div>
+            </nav>
+
+            <div class="container-xxl bg-primary hero-header">
+                <div class="container px-lg-5">
+                    <div class="row g-5">
+                        <div class="col-lg-8 text-center text-lg-start">
+                            <h1 class="text-white mb-4 animated slideInDown">Welcome to Bump Care - Your Pregnancy</h1>
+                            <p class="text-white pb-3 animated slideInDown">Your one-stop solution for all things
+                                pregnancy, from conception to childbirth, we provide you with personalized insights,
+                                useful tips, and essential tools to make your journey smooth and memorable</p>
+
+                        </div>
+                        <div class="col-lg-4 d-flex justify-content-center justify-content-lg-end wow fadeInUp"
+                            style="visibility: visible; margin-left: auto; margin-right: auto " data-wow-delay="0.3s">
+                            <img src="{{ url_for('static', filename='img/pic_1.png') }}" alt="Logo" class="img-responsive">
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Navbar & Hero End -->
+
+
+        <!-- Sections Start -->
+        <div class="grid-container">
+            <div class="article-box" onclick="window.location.href='/start'"> <img
+                    src="{{ url_for('static', filename='img/test.jpg') }}" alt="Getting Pregnant">
+                <h2>Getting Pregnant</h2>
+                <p>Learn essential tips and advice on how to prepare for pregnancy and boost your chances of conceiving.
+                </p>
+            </div>
+            <div class="article-box" onclick="window.location.href='/week'"> <img
+                    src="{{ url_for('static', filename='img/test3.jpg') }}" alt="Pregnancy Journey">
+                <h2>Pregnancy Journey</h2>
+                <p>Track your pregnancy week by week, with detailed insights on baby development and mother’s body
+                    changes.</p>
+            </div>
+            
+            <div class="article-box" onclick="window.location.href='/doctor'"> <img
+                src="{{ url_for('static', filename='img/test4.jpg') }}" alt="Specilized Doctors">
+            <h2>Specilized Doctors</h2>
+            <p>Receive expert care from Bangladesh's top doctors, including gynecologists, pediatricians, and nutritionists, who are dedicated to providing personalized and comprehensive care for your pregnancy journey.</p>
+        </div>
+        </div> <!-- Sections End --> <!-- Useful Tools Start -->
+
+        <!-- Useful Tools Start -->
+        <div class="tools-header">
+            <h2>Our Tools</h2>
+        </div>
+        <div class="tools-container">
+            <div class="tools-grid">
+                <div class="tool-box" onclick="window.location.href='/tool'">
+                    <div class="icon-container">
+                        <i class="bi bi-calendar3"></i>
+                    </div>
+                    <p>Ovulation Calculator</p>
+                </div>
+                <div class="tool-box" onclick="window.location.href='/tool'">
+                    <div class="icon-container">
+                        <i class="bi bi-heart"></i>
+                    </div>
+                    <p>Pregnancy Due Date Calculator</p>
+                </div>
+                <div class="tool-box" onclick="window.location.href='/tool'">
+                    <div class="icon-container">
+                        <i class="bi bi-card-list"></i>
+                    </div>
+                    <p>Baby Name Generator</p>
+                </div>
+                <div class="tool-box" onclick="window.location.href='/tool'">
+                    <div class="icon-container">
+                        <i class="bi bi-egg-fried"></i> <!-- Icon for Diet Planner -->
+                    </div>
+                    <p>Diet Planner</p>
+                </div>
+            </div>
+        </div>
+        <!-- Useful Tools End -->
+
+
+    <!-- About Start -->
+    <div class="container-xxl py-5" id="about">
+        <div class="container py-5 px-lg-5">
+            <div class="row g-5 align-items-center">
+                <div class="col-lg-6 wow fadeInUp" data-wow-delay="0.1s" style="visibility: visible; animation-delay: 0.1s; animation-name: fadeInUp;">
+                    <h5 class="text-primary-gradient fw-medium">About Belly Buddy</h5>
+                    <h1 class="mb-4">Reliable Information Anytime</h1>
+                    <p class="mb-4">This AI Chatbot employs state-of-the-art natural language processing (NLP) techniques to comprehend and respond to user inquiries effectively. The chatbot has been meticulously trained using custom-made datasets that encompass a wide range of pregnancy-related information, ensuring relevant and reliable responses.[Chatbot Name] provides weekly updates on fetal development, nutritional advice, symptom checkers, and wellness tips. Accessible on any device—whether you're using a smartphone, tablet, desktop, or laptop.</p>
+                    
+                    
+                </div>
+                <div class="col-lg-6">
+                    <img class="img-fluid wow fadeInUp" data-wow-delay="0.5s" src="{{ url_for('static', filename='img/demo.png') }} " style="visibility: visible; height: 400px; width: 600px ; margin-left: auto; margin-right: auto; animation-delay: 0.5s; animation-name: fadeInUp;">
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- About End -->
+
+
+
+
+
+
+
+
+
+
+
+        <!-- Footer Start -->
+        <div class="container-fluid bg-primary text-light footer wow fadeIn" data-wow-delay="0.1s"
+            style="visibility: visible; animation-delay: 0.1s; animation-name: fadeIn;">
+            <div class="container py-5 px-lg-5">
+                <div class="row g-5">
+                    <div class="col-md-6 col-lg-3">
+                        <h4 class="text-white mb-4">Give Your Feedback</h4>
+                        <p><i class="fa fa-map-marker-alt me-3"></i>Dhaka, Bangladesh</p>
+                        <p><i class="fa fa-phone-alt me-3"></i>+012 345 67890</p>
+                        <p><i class="fa fa-envelope me-3"></i>ilora.lamisa@gmail.com</p>
+                        <div class="d-flex pt-2">
+                            <a class="btn btn-outline-light btn-social" href=""><i class="fab fa-facebook-f"></i></a>
+                            <a class="btn btn-outline-light btn-social" href=""><i class="fab fa-github-square"></i></a>
+                            <a class="btn btn-outline-light btn-social" href=""><i class="fab fa-linkedin-in"></i></a>
+                        </div>
+                    </div>
+
+
+                </div>
+            </div>
+            <div class="container px-lg-5">
+                <div class="copyright">
+                    <div class="row">
+
+
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Footer End -->
+
+
+        <!-- chatbot -->
+        <div class="chatBot">
+            <div class="chatBotHeading">
+                <label for="chatTextBox" id="chatOpenTrigger" class=""><img
+                    src="{{ url_for('static', filename='img/chaticon.png') }}" alt="Send" srcset=""></button>
+            </div>
+            <hr class="">
+            <div class="chatBody">
+                <div class="chatSession">
+                </div>
+            </div>
+            <form class="chatForm" autocomplete="off">
+                <div class="typingArea">
+                    <textarea name="chatInput" id="chatTextBox" class="textArea"
+                        onblur="if(!validateMessage()) this.value = 'Type here...'"
+                        onfocus="if(!validateMessage()) this.value = ''"></textarea>
+                    <button type="submit" class="sendButton" id="sendButton"><img
+                            src="{{ url_for('static', filename='img/send.svg') }}" alt="Send" srcset=""></button>
+                </div>
+                <button type="button" id="chatCloseTrigger">Close Chat!</button>
+            </form>
+        </div>
+        <script src="{{ url_for('static', filename='js/chatBotConversation.js') }}"></script>
+        <script src="{{ url_for('static', filename='js/chatBotValidate.js') }}"></script>
+        <script src="{{ url_for('static', filename='js/chatBotAnimate.js') }}"></script>
+
+    </div>
+
+    <!-- JavaScript Libraries -->
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="{{ url_for('static', filename='lib/wow/wow.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='lib/easing/easing.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='lib/waypoints/waypoints.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='lib/counterup/counterup.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='lib/owlcarousel/owl.carousel.min.js') }}"></script>
+
+    <!-- Template Javascript -->
+    <script src="{{ url_for('static', filename='js/main.js') }} "></script>
+<script>document.addEventListener('DOMContentLoaded', function() {
+    const addButton = document.getElementById('add-button');
+    let deferredPrompt;
+
+    window.addEventListener('beforeinstallprompt', (e) => {
+        e.preventDefault();
+        deferredPrompt = e;
+        addButton.style.display = 'block';
+
+        addButton.addEventListener('click', () => {
+            addButton.style.display = 'none';
+            deferredPrompt.prompt();
+            deferredPrompt.userChoice.then((choiceResult) => {
+                if (choiceResult.outcome === 'accepted') {
+                    console.log('User accepted the A2HS prompt');
+                } else {
+                    console.log('User dismissed the A2HS prompt');
+                }
+                deferredPrompt = null;
+            });
+        });
+    });
+});
+</script>
+
+</body>
+
+</html>

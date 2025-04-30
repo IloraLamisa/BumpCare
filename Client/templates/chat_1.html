@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chat with Bot</title>
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #f5f5f5;
+            margin: 0;
+            padding: 10px;
+            /* Added padding for small devices */
+        }
+
+        #chat-container {
+            max-width: 100%;
+            width: 400px;
+            height: 600px;
+            border: 1px solid #ccc;
+            background-color: #fff;
+            display: flex;
+            flex-direction: column;
+            box-sizing: border-box;
+            /* Ensures padding does not add to the width */
+        }
+
+        #chat-box {
+            flex-grow: 1;
+            padding: 10px;
+            overflow-y: auto;
+        }
+
+        #user-input {
+            border: none;
+            padding: 10px;
+            width: calc(100% - 20px);
+            /* Adjust width to account for padding */
+            box-sizing: border-box;
+        }
+
+        #send-btn {
+            border: none;
+            background-color: #007bff;
+            color: white;
+            padding: 10px 20px;
+            cursor: pointer;
+        }
+
+        #chat-box .message {
+            display: flex;
+            align-items: center;
+            margin: 5px;
+            padding: 10px;
+            background-color: #f1f1f1;
+            border-radius: 5px;
+        }
+
+        #chat-box .bot-message {
+            background-color: #007bff;
+            color: white;
+        }
+
+        .user-message,
+        .bot-message {
+            display: flex;
+            align-items: center;
+        }
+
+        .message a.map {
+            background-color: green;
+            color: white;
+            padding: 6px;
+            border-radius: 5px;
+            text-decoration: none;
+        }
+
+        .chat-avatar {
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            margin-right: 8px;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 500px) {
+            #chat-container {
+                width: 100%;
+                /* Full width on small screens */
+                height: 100%;
+                /* Adjust height for small screens */
+                margin-bottom: 20px;
+                /* Add some margin at the bottom */
+            }
+
+            #user-input,
+            #send-btn {
+                width: auto;
+                /* Adjust width for input and button */
+                flex-grow: 1;
+                /* Allow input and button to fill space */
+            }
+
+            body {
+                flex-direction: column;
+                /* Stack elements vertically on small screens */
+            }
+        }
+    </style>
+
+</head>
+
+<body>
+    
+    <div>
+        <h1>Pregnancy Well-Being Chatbot</h1>
+        <p>Ask me anything about pregnancy health tips!</p>
+
+        <div id="chat-container">
+            <div id="chat-box"></div>
+            <input type="text" id="user-input" placeholder="Type a message...">
+            <button id="send-btn">Send</button>
+        </div>
+    </div>
+
+    <script>
+        const userInput = document.getElementById('user-input');
+        const sendBtn = document.getElementById('send-btn');
+        const chatBox = document.getElementById('chat-box');
+
+        function appendMessage(text, sender = 'user', isHTML = false) {
+            const messageDiv = document.createElement('div');
+            messageDiv.classList.add('message');
+
+            const img = document.createElement('img');
+            img.classList.add('chat-avatar');
+
+            if (sender === 'bot') {
+                messageDiv.classList.add('bot-message');
+                img.src = 'static/img/bot.png'; // Ensure the path to your bot image is correct
+            } else {
+                messageDiv.classList.add('user-message');
+                img.src = 'static/img/user.png'; // Ensure the path to your user image is correct
+            }
+
+            messageDiv.appendChild(img);
+
+            if (isHTML || text.includes('<br>') || text.includes('href=') || text.includes('img src=')) {
+                // Treat the message as HTML. Ensure to sanitize this in a real application to prevent XSS.
+                const textDiv = document.createElement('div'); // Create a new div to hold the HTML content.
+                textDiv.innerHTML = text; // Set the HTML content.
+                console.log(textDiv.innerHTML);
+
+                messageDiv.appendChild(textDiv); // Append the new div with HTML content to the message container.
+            } else {
+                const textSpan = document.createElement('span');
+                textSpan.textContent = text;
+                messageDiv.appendChild(textSpan);
+            }
+
+            chatBox.appendChild(messageDiv);
+            chatBox.scrollTop = chatBox.scrollHeight;
+        }
+
+        sendBtn.addEventListener('click', function () {
+            const message = userInput.value.trim();
+            if (message) {
+                appendMessage(message, 'user');
+                fetch('/get?msg=' + encodeURIComponent(message), {
+                    method: 'GET'
+                })
+                    .then(response => response.json())
+                    .then(data => {
+                        data.forEach((botMessage) => {
+                            appendMessage(botMessage.text, 'bot', true); // Treat all bot messages as HTML
+                        });
+                    })
+                    .catch(error => {
+                        console.error('Error:', error);
+                        appendMessage("There was an error communicating with the bot. Please try again.", 'bot');
+                    });
+                userInput.value = ''; // Clear the input after sending
+            }
+        });
+    </script>
+
+
+</body>
+
+</html>

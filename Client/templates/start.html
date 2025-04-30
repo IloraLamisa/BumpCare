@@ -1,0 +1,503 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <title>Bump Care</title>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <meta content="" name="keywords">
+    <meta content="" name="description">
+
+    <!-- Favicon -->
+    <link href="img/favicon.ico" rel="icon">
+
+    <!-- Google Web Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Heebo:wght@400;500&amp;family=Jost:wght@500;600;700&amp;display=swap"
+        rel="stylesheet">
+
+    <!-- Icon Font Stylesheet -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css" rel="stylesheet">
+
+    <!-- Libraries Stylesheet -->
+    <link href="{{ url_for('static', filename='css/animate.min.css')}}" rel="stylesheet">
+    <link href="{{ url_for('static', filename='lib/owlcarousel/assets/owl.carousel.min.css') }} " rel="stylesheet">
+
+    <!-- Customized Bootstrap Stylesheet -->
+    <link href="{{ url_for('static', filename='css/bootstrap.min.css') }}" rel="stylesheet">
+
+    <!-- Template Stylesheet -->
+    <link href="{{ url_for('static', filename='css/style.css') }}" rel="stylesheet">
+    <style>
+        ul {
+            list-style: none;
+            padding-left: 0;
+            font-size: larger;
+        }
+
+        ul li {
+            margin-bottom: 1rem;
+            padding-left: 1.5rem;
+            position: relative;
+        }
+
+        ul li::before {
+            content: icon;
+            color: #6521a5;
+            position: absolute;
+            left: 0;
+        }
+
+        strong {
+            color: #6521a5;
+        }
+
+        .steps {
+
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+            justify-self: center;
+            padding: 2rem;
+            margin: 2%;
+        }
+
+        .step {
+
+            background: #fbeef2;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s, box-shadow 0.3s;
+            padding: 2rem;
+            justify-items: center;
+            margin: 10px;
+        }
+
+        .step:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+        }
+
+        .step h3 {
+            color: #6521a5;
+        }
+
+        .step_image {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            transition: transform 0.3s;
+
+        }
+
+        .step_image img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 10px;
+        }
+
+        .step_image:hover {
+            transform: scale(1.05);
+        }
+
+
+
+        h1 {
+            color: #333;
+            justify-self: center;
+            margin: 10px;
+        }
+
+        .h3 {
+            color: #333;
+            justify-self: center;
+            margin: 10px;
+        }
+
+        form {
+            background: #fbeef2;
+            padding: 2rem;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            margin: 25px;
+            max-width: 600px;
+            margin: auto;
+        }
+
+        .question {
+            margin-bottom: 1.5rem;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 0.5rem;
+        }
+
+        select {
+            width: 100%;
+            padding: 0.5rem;
+            border: 1px solid #3a3939;
+            border-radius: 5px;
+        }
+
+        button {
+            display: inline-block;
+            padding: 0.5rem 1rem;
+            background: #4a3777;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background 0.3s;
+            align-self: center;
+            margin-top: 10px;
+            width: 100%;
+        }
+
+        button:hover {
+            background: #7a50ad;
+        }
+
+        #result {
+            margin: 20px;
+            font-size: 1.5rem;
+            font-weight: bold;
+            justify-self: center;
+
+        }
+
+        @media (max-width: 768px) {
+            form {
+                padding: 1.5rem;
+            }
+
+            button {
+                padding: 0.5rem;
+            }
+
+            .step {
+                flex: 1 1 calc(50% - 20px);
+                /* Adjust for smaller screens */
+            }
+            .step_image img { max-width: 100%; height: auto; }
+            .img-responsive {
+          max-width: 100%;
+           height: auto;
+            }
+        }
+
+        @media (max-width: 480px) {
+            form {
+                padding: 1rem;
+            }
+
+            button {
+                padding: 0.5rem;
+            }
+
+            .step {
+                flex: 1 1 100%;
+                /* Full width for mobile devices */
+            }
+            .img-responsive {
+          max-width: 100%;
+           height: auto;
+            }
+            .step_image img { max-width: 100%; height: auto; }
+        }
+    </style>
+</head>
+
+<body data-bs-spy="scroll" data-bs-target=".navbar" data-bs-offset="51">
+    <div class="container-xxl bg-white p-0">
+        <!-- Spinner Start -->
+        <div id="spinner"
+            class="bg-white position-fixed translate-middle w-100 vh-100 top-50 start-50 d-flex align-items-center justify-content-center">
+            <div class="spinner-grow text-primary" style="width: 3rem; height: 3rem;" role="status">
+                <span class="sr-only">Loading...</span>
+            </div>
+        </div>
+        <!-- Spinner End -->
+
+
+        <!-- Navbar & Hero Start -->
+        <div class="container-xxl position-relative p-0" id="home">
+            <nav class="navbar navbar-expand-lg navbar-light px-4 px-lg-5 py-3 py-lg-0 sticky-top shadow-sm">
+                <a href="" class="navbar-brand p-0">
+                    <h1 class="m-0">Bump Care</h1>
+                    <!-- <img src="img/logo.png" alt="Logo"> -->
+                </a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse">
+                    <span class="fa fa-bars"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarCollapse">
+                    <div class="navbar-nav mx-auto py-0">
+                        <a href="/" class="nav-item nav-link">Home</a>
+                        <a href="/start" class="nav-item nav-link">Getting Pregnant</a>
+                        <a href="/week" class="nav-item nav-link">Pregnancy Journey</a>
+                        <a href="/tool" class="nav-item nav-link">Usefull Tools</a>
+                        <a href="/doctor" class="nav-item nav-link">Find Doctors</a>
+                        <a href="/chtbt" class="nav-item nav-link">Our Ai Chatbot</a>
+                    </div>
+                </div>
+            </nav>
+
+            <div class="container-xxl bg-primary hero-header">
+                <div class="container px-lg-5">
+                    <div class="row g-5">
+                        <div class="col-lg-8 text-center text-lg-start">
+                            <h1 class="text-white mb-4 animated slideInDown">Getting Started for Pregnancy</h1>
+                            <p class="text-white pb-3 animated slideInDown">Embarking on the journey to parenthood is an
+                                exciting and transformative experience. Whether you're just beginning to think about
+                                starting a family or are actively trying to conceive, taking the right steps can help
+                                ensure a healthy and happy pregnancy.</p>
+
+                        </div>
+                        <div class="col-lg-4 d-flex justify-content-center justify-content-lg-end wow fadeInUp"
+                            style="visibility: visible; margin-left: auto; margin-right: auto " data-wow-delay="0.3s">
+                            <img src="{{ url_for('static', filename='img/wlcm.png') }}" alt="Logo" class="img-responsive">
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Navbar & Hero End -->
+
+
+        <!-- About Start -->
+        <div class="container-xxl py-5" id="about">
+            <div class="container py-5 px-lg-5">
+                <div class="row g-5 align-items-center">
+                    <div class="col-lg-6 wow fadeInUp" data-wow-delay="0.1s"
+                        style="visibility: visible; animation-delay: 0.1s; animation-name: fadeInUp;">
+                        <h1 class="mb-4">Preparation Tips:</h1>
+                        <ul>
+                            <li><strong>Healthy Lifestyle:</strong> Maintaining a balanced diet and regular exercise
+                                routine is crucial. Ensure you're getting essential nutrients, including folic acid,
+                                which supports fetal development.</li>
+                            <li><strong>Medical Consultation:</strong> Schedule a preconception checkup with your
+                                healthcare provider to discuss any health concerns and get personalized advice.</li>
+                            <li><strong>Track Your Cycle:</strong> Understanding your menstrual cycle can help identify
+                                your most fertile days. Tools like ovulation calculators can be incredibly helpful.</li>
+                            <li><strong>Reduce Stress:</strong> Stress can affect fertility, so finding ways to relax
+                                and manage stress is important. Techniques like yoga, meditation, or even a new hobby
+                                can help.</li>
+                            <li><strong>Healthy Habits:</strong> Avoid smoking, alcohol, and recreational drugs. Limit
+                                caffeine intake and strive for a healthy weight.</li>
+                            <li><strong>Partner Support:</strong> Share this journey with your partner. Their support
+                                and involvement can make the process smoother and more enjoyable.</li>
+                        </ul>
+                    </div>
+                    <div class="col-lg-6">
+                        <img class="img-fluid wow fadeInUp" data-wow-delay="0.5s"
+                            src="{{ url_for('static', filename='img/gtn.png') }} "
+                            style="visibility: visible; height: 500px; width: 500px ; margin-left: auto; margin-right: auto; animation-delay: 0.5s; animation-name: fadeInUp; border-radius: 5px;">
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- About End -->
+
+        <div>
+            <header>
+                <h1>Find out the possibility of being pregnant.</h1>
+
+            </header>
+            <form id="pregnancyForm">
+                <div class="question"> <label for="q1">Have you had sex since your last period? *</label> <select
+                        id="q1" required>
+                        <option value="Yes, and we didn't use birth control.">Yes, and we didn't use birth control.
+                        </option>
+                        <option value="Yes, and we did use birth control.">Yes, and we did use birth control.</option>
+                        <option value="Yes, but my partner didn't ejaculate in my vagina.">Yes, but my partner didn't
+                            ejaculate in my vagina.</option>
+                        <option value="Yes, but it was near or during my period.">Yes, but it was near or during my
+                            period.</option>
+                        <option value="No">No</option>
+                        <option value="I don't know.">I don't know.</option>
+                    </select> </div>
+                <div class="question"> <label for="q2">Is your period late? *</label> <select id="q2" required>
+                        <option value="Yes, it's usually on time, but this month it's late.">Yes, it's usually on time,
+                            but this month it's late.</option>
+                        <option value="Not sure. I don't know when to expect it.">Not sure. I don't know when to expect
+                            it.</option>
+                        <option value="I had some bleeding but I'm not sure if it was my period.">I had some bleeding
+                            but I'm not sure if it was my period.</option>
+                        <option value="I'm breastfeeding and haven't had a period since my pregnancy.">I'm breastfeeding
+                            and haven't had a period since my pregnancy.</option>
+                        <option value="Not yet.">Not yet.</option>
+                    </select> </div>
+                <div class="question"> <label for="q3">How many of these symptoms do you have: swollen, tender breasts;
+                        unusual fatigue; nausea; bloating; frequent urge to urinate? *</label> <select id="q3" required>
+                        <option value="None.">None.</option>
+                        <option value="Some of them.">Some of them.</option>
+                        <option value="All of them.">All of them.</option>
+                    </select> </div>
+                <div class="question"> <label for="q4">Have you taken a home pregnancy test? *</label> <select id="q4"
+                        required>
+                        <option value="Yes, it was negative.">Yes, it was negative.</option>
+                        <option value="Yes, it was positive.">Yes, it was positive.</option>
+                        <option value="Yes, but the result was unclear.">Yes, but the result was unclear.</option>
+                        <option value="No.">No.</option>
+                    </select> </div> <button type="button" onclick="checkPregnancy()">Submit</button>
+            </form>
+            <div id="result"></div>
+        </div>
+
+
+
+        <header>
+            <h1>Step-by-Step Process of using pregnancy kit.</h1>
+
+        </header>
+
+        <div class="steps">
+            <div class="step">
+                <h3>Step 1: Read the Instructions</h3>
+                <p>Before starting, make sure to read the instructions provided with the pregnancy test kit.</p>
+            </div>
+            <div class="step">
+                <h3>Step 2: Collect Your Sample</h3>
+                <p>Use a clean container to collect your urine sample.</p>
+            </div>
+
+            <div class="step">
+                <h3>Step 3: Dip the Test Strip</h3>
+                <p>Dip the test strip into the urine sample and remove it after the recommended time.</p>
+            </div>
+            <div class="step">
+                <h3>Step 4: Wait for Results</h3>
+                <p>Wait for the indicated time to read the test results.</p>
+            </div>
+            <div class="step">
+                <div class="step_image">
+                    <img src="{{ url_for('static', filename='img/use.jpeg') }} " alt="Collect Your Sample">
+                </div>
+            </div>
+            <div class="step">
+                <div class="step_image">
+                    <img src="{{ url_for('static', filename='img/result.jpeg') }} " alt="Collect Your Sample">
+                </div>
+            </div>
+        </div>
+
+
+
+
+        <!-- Footer Start -->
+        <div class="container-fluid bg-primary text-light footer wow fadeIn" data-wow-delay="0.1s"
+            style="visibility: visible; animation-delay: 0.1s; animation-name: fadeIn;">
+            <div class="container py-5 px-lg-5">
+                <div class="row g-5">
+                    <div class="col-md-6 col-lg-3">
+                       <h4 class="text-white mb-4">Give Your Feedback</h4>
+                        <p><i class="fa fa-map-marker-alt me-3"></i>Dhaka, Bangladesh</p>
+                        <p><i class="fa fa-phone-alt me-3"></i>+012 345 67890</p>
+                        <p><i class="fa fa-envelope me-3"></i>ilora.lamisa@gmail.com</p>
+                        <div class="d-flex pt-2">
+                            <a class="btn btn-outline-light btn-social" href=""><i class="fab fa-facebook-f"></i></a>
+                            <a class="btn btn-outline-light btn-social" href=""><i class="fab fa-github-square"></i></a>
+                            <a class="btn btn-outline-light btn-social" href=""><i class="fab fa-linkedin-in"></i></a>
+                        </div>
+                    </div>
+
+
+                </div>
+            </div>
+            <div class="container px-lg-5">
+                <div class="copyright">
+                    <div class="row">
+
+
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Footer End -->
+
+
+        <!-- chatbot -->
+        <div class="chatBot">
+            <div class="chatBotHeading">
+                <label for="chatTextBox" id="chatOpenTrigger" class=""><img
+                    src="{{ url_for('static', filename='img/chaticon.png') }}" alt="Send" srcset=""></button>
+            </div>
+            <hr class="">
+            <div class="chatBody" id="chatBody">
+                <div class="chatSession" id="chatSession">
+                    <div class="container messageContainer">
+                        <p class="message">User message here</p>
+                    </div>
+                    <div class="container replyContainer">
+                        <p class="reply">Chatbot reply here</p>
+                    </div>
+                </div>
+            </div>
+            
+            <form class="chatForm" autocomplete="off">
+                <div class="typingArea">
+                    <textarea name="chatInput" id="chatTextBox" class="textArea"
+                        onblur="if(!validateMessage()) this.value = 'Type here...'"
+                        onfocus="if(!validateMessage()) this.value = ''"></textarea>
+                    <button type="submit" class="sendButton" id="sendButton"><img
+                        src="{{ url_for('static', filename='img/send.svg') }}" alt="Send" srcset=""></button>
+                </div>
+                <button type="button" id="chatCloseTrigger">Close Chat!</button>
+            </form>
+        </div>
+        <script src="{{ url_for('static', filename='js/chatBotConversation.js') }}"></script>
+        <script src="{{ url_for('static', filename='js/chatBotValidate.js') }}"></script>
+        <script src="{{ url_for('static', filename='js/chatBotAnimate.js') }}"></script>
+
+    </div>
+
+    <!-- JavaScript Libraries -->
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="{{ url_for('static', filename='lib/wow/wow.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='lib/easing/easing.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='lib/waypoints/waypoints.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='lib/counterup/counterup.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='lib/owlcarousel/owl.carousel.min.js') }}"></script>
+
+    <!-- Template Javascript -->
+    <script src="{{ url_for('static', filename='js/main.js') }} "></script>
+    <script>function checkPregnancy() {
+            const q1 = document.getElementById('q1').value;
+            const q2 = document.getElementById('q2').value;
+            const q3 = document.getElementById('q3').value;
+            const q4 = document.getElementById('q4').value;
+
+            let score = 0;
+
+            // Simple scoring system for demonstration purposes
+            if (q1 === "Yes, and we didn't use birth control.") score += 3;
+            if (q1 === "Yes, but my partner didn't ejaculate in my vagina.") score += 1;
+            if (q2 === "Yes, it's usually on time, but this month it's late.") score += 2;
+            if (q3 === "Some of them.") score += 1;
+            if (q3 === "All of them.") score += 3;
+            if (q4 === "Yes, it was positive.") score += 5;
+            if (q4 === "Yes, but the result was unclear.") score += 2;
+
+            let resultText = "";
+
+            if (score >= 8) {
+                resultText = "There is a high chance that you might be pregnant. Please consider taking a home pregnancy test for confirmation.";
+            } else if (score >= 4) {
+                resultText = "There is a possibility that you could be pregnant. Monitor your symptoms and consider taking a home pregnancy test.";
+            } else {
+                resultText = "It is unlikely that you are pregnant based on your answers. If you have concerns, please consult with a healthcare provider.";
+            }
+
+            document.getElementById('result').innerText = resultText;
+        }
+    </script>
+
+
+</body>
+
+</html>

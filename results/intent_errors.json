@@ -1,0 +1,82 @@
+[
+  {
+    "text": "18-30",
+    "intent": "provide_exercise_age",
+    "intent_prediction": {
+      "name": "provide_baby_development_weeks",
+      "confidence": 0.5179530382156372
+    }
+  },
+  {
+    "text": "31-39",
+    "intent": "provide_exercise_age",
+    "intent_prediction": {
+      "name": "provide_baby_development_weeks",
+      "confidence": 0.5179530382156372
+    }
+  },
+  {
+    "text": "40+",
+    "intent": "provide_exercise_age",
+    "intent_prediction": {
+      "name": "provide_baby_development_weeks",
+      "confidence": 0.503048837184906
+    }
+  },
+  {
+    "text": "40 plus",
+    "intent": "provide_exercise_age",
+    "intent_prediction": {
+      "name": "provide_baby_development_weeks",
+      "confidence": 0.5209058523178101
+    }
+  },
+  {
+    "text": "Why are prenatal vitamins important?",
+    "intent": "prenatal_vitamins_importance",
+    "intent_prediction": {
+      "name": "prenatal_vitamins",
+      "confidence": 0.9120523929595947
+    }
+  },
+  {
+    "text": "What are the benefits of taking prenatal vitamins?",
+    "intent": "prenatal_vitamins_importance",
+    "intent_prediction": {
+      "name": "prenatal_vitamins",
+      "confidence": 0.9380685687065125
+    }
+  },
+  {
+    "text": "Are prenatal vitamins necessary for all pregnant women?",
+    "intent": "prenatal_vitamins_importance",
+    "intent_prediction": {
+      "name": "prenatal_vitamins",
+      "confidence": 0.8293716311454773
+    }
+  },
+  {
+    "text": "How do prenatal vitamins help my baby's development?",
+    "intent": "prenatal_vitamins_importance",
+    "intent_prediction": {
+      "name": "prenatal_vitamins",
+      "confidence": 0.8172822594642639
+    }
+  },
+  {
+    "text": "What are the risks of not taking prenatal vitamins?",
+    "intent": "prenatal_vitamins_importance",
+    "intent_prediction": {
+      "name": "prenatal_vitamins",
+      "confidence": 0.9068936705589294
+    }
+  },
+  {
+    "text": "Is it safe to eat deli meat during pregnancy?",
+    "intent": "sushi_deli_meat_pregnancy",
+    "intent_prediction": {
+      "name": "pregnancy_diet_avoidance",
+      "confidence": 0.45336589217185974
+    }
+  }
+]

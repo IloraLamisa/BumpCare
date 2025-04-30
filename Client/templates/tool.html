@@ -1,0 +1,527 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <title>Bump Care</title>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <meta content="" name="keywords">
+    <meta content="" name="description">
+
+    <!-- Favicon -->
+    <link href="img/favicon.ico" rel="icon">
+
+    <!-- Google Web Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Heebo:wght@400;500&amp;family=Jost:wght@500;600;700&amp;display=swap"
+        rel="stylesheet">
+
+    <!-- Icon Font Stylesheet -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css" rel="stylesheet">
+
+    <!-- Libraries Stylesheet -->
+    <link href="{{ url_for('static', filename='css/animate.min.css')}}" rel="stylesheet">
+    <link href="{{ url_for('static', filename='lib/owlcarousel/assets/owl.carousel.min.css') }} " rel="stylesheet">
+
+    <!-- Customized Bootstrap Stylesheet -->
+    <link href="{{ url_for('static', filename='css/bootstrap.min.css') }}" rel="stylesheet">
+
+    <!-- Template Stylesheet -->
+    <link href="{{ url_for('static', filename='css/style.css') }}" rel="stylesheet">
+    <style>
+        .introduction {
+            background: linear-gradient(to bottom right, #4294e3, #8f12fd);
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            padding-top: 10%;
+            padding-left: 5%;
+            padding-right: 5%;
+            padding-bottom: 5%;
+            text-align: center;
+            margin-bottom: 10px;
+            color: #ffffff;
+
+        }
+
+        .introduction h1 {
+            color: #fff;
+            font-weight: 700 !important;
+            margin-top: 0;
+            margin-bottom: .5rem;
+            font-family: "Jost", sans-serif;
+            font-weight: 500;
+            line-height: 1.2;
+
+        }
+
+        .introduction p {
+            font-size: 1.2rem;
+            margin-bottom: 1.5rem;
+            color: #ffffff;
+        }
+
+        .cont {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+            margin: 20px;
+        }
+
+        .calculator,
+        .planner {
+            background-color: #f6ebff;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+            text-align: center;
+            animation: fadeIn 1s ease-in-out;
+            margin: 20px;
+        }
+
+        form {
+            display: flex;
+            flex-direction: column;
+        }
+
+        label,
+        input {
+            margin-bottom: 10px;
+            color: #6e6e6e;
+        }
+
+        button {
+            background: linear-gradient(to bottom right, #4294e3, #8f12fd);
+            color: #ffffff;
+            border: none;
+            padding: 10px;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        button:hover {
+            transform: scale(1.05);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+
+        .result-frame {
+            margin-top: 20px;
+            border-top: 1px solid #6e6e6e;
+            padding-top: 20px;
+        }
+
+        .hidden {
+            display: none;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .meal-plan {
+            margin-top: 20px;
+            border-top: 1px solid #6e6e6e;
+            padding-top: 20px;
+        }
+
+        /* Media Queries */
+        @media (max-width: 768px) {
+            .introduction p {
+                font-size: 1rem;
+            }
+
+            .cont {
+                grid-template-columns: 1fr;
+                gap: 15px;
+            }
+
+            .calculator,
+            .planner {
+                margin: 15px;
+                padding: 15px;
+            }
+
+            form {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            button {
+                padding: 8px;
+                font-size: 1rem;
+            }
+
+            .result-frame,
+            .meal-plan {
+                padding-top: 15px;
+            }
+        }
+
+        @media (max-width: 576px) {
+            .introduction h1 {
+                font-size: 1.5rem;
+            }
+
+            .introduction p {
+                font-size: 0.9rem;
+            }
+
+            .calculator,
+            .planner {
+                margin: 10px;
+                padding: 10px;
+            }
+
+            form {
+                width: 100%;
+            }
+
+            button {
+                padding: 6px;
+                font-size: 0.9rem;
+            }
+
+            .result-frame,
+            .meal-plan {
+                padding-top: 10px;
+            }}
+    </style>
+</head>
+
+<body data-bs-spy="scroll" data-bs-target=".navbar" data-bs-offset="51">
+    <div class="container-xxl bg-white p-0">
+        <!-- Spinner Start -->
+        <div id="spinner"
+            class="bg-white position-fixed translate-middle w-100 vh-100 top-50 start-50 d-flex align-items-center justify-content-center">
+            <div class="spinner-grow text-primary" style="width: 3rem; height: 3rem;" role="status">
+                <span class="sr-only">Loading...</span>
+            </div>
+        </div>
+        <!-- Spinner End -->
+
+
+        <!-- Navbar & Hero Start -->
+        <div class="container-xxl position-relative p-0">
+            <nav class="navbar navbar-expand-lg navbar-light px-4 px-lg-5 py-3 py-lg-0 sticky-top shadow-sm">
+                <a href="" class="navbar-brand p-0">
+                    <h1 class="m-0">Bump Care</h1>
+                    <!-- <img src="img/logo.png" alt="Logo"> -->
+                </a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse">
+                    <span class="fa fa-bars"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarCollapse">
+                    <div class="navbar-nav mx-auto py-0">
+                        <a href="/" class="nav-item nav-link">Home</a>
+                        <a href="/start" class="nav-item nav-link">Getting Pregnant</a>
+                        <a href="/week" class="nav-item nav-link">Pregnancy Journey</a>
+                        <a href="/tool" class="nav-item nav-link">Usefull Tools</a>
+                        <a href="/doctor" class="nav-item nav-link">Find Doctors</a>
+                        <a href="/chtbt" class="nav-item nav-link">Our Ai Chatbot</a>
+                    </div>
+                </div>
+            </nav>
+
+
+
+
+            <div class="introduction">
+                <h1>Essential Pregnancy Tools: Your Ultimate Guide to a Smooth Journey</h1>
+                <p>Embarking on the path to parenthood is a remarkable and life-changing experience. Whether you're
+                    planning to conceive or are already on your journey, having the right information and tools at your
+                    fingertips is essential. Our Pregnancy Tool is designed to provide you with personalized insights,
+                    useful tips, and the support you need as you navigate this exciting chapter.</p>
+            </div>
+        </div>
+        <!-- Navbar & Hero End -->
+
+        <div class="cont">
+            <div class="calculator">
+                <h1>Pregnancy Due Date Calculator</h1>
+                <form id="dueDateForm"> <label for="lastPeriodDate">Last Menstrual Period Date:</label> <input
+                        type="date" id="lastPeriodDate" required> <button type="submit">Calculate</button> </form>
+                <div id="resultFrame" class="result-frame hidden">
+                    <h2>Your Pregnancy Details</h2>
+                    <p id="dueDate"></p>
+                    <p id="pregnancyWeek"></p>
+                    <div id="babyCondition"></div>
+                </div>
+            </div>
+            <div class="calculator">
+                <h1>Ovulation Calculator</h1>
+                <form id="ovulationForm"> <label for="cycleLength">Cycle Length (days):</label> <input type="number"
+                        id="cycleLength" required> <label for="periodStartDate">Last Period Start Date:</label> <input
+                        type="date" id="periodStartDate" required> <button type="submit">Calculate</button> </form>
+                <div id="ovulationResultFrame" class="result-frame hidden">
+                    <h2>Your Ovulation Details</h2>
+                    <p id="ovulationDate"></p>
+                </div>
+            </div>
+            <div class="calculator">
+                <h1>Baby Name Generator</h1>
+                <form id="nameForm"> <label for="gender">Select Gender:</label> <select id="gender">
+                        <option value="">Any</option>
+                        <option value="Male">Male</option>
+                        <option value="Female">Female</option>
+                    </select> <label for="letter">Starting Letter:</label> <input type="text" id="letter" maxlength="1"
+                        placeholder="e.g., A"> <button type="button" onclick="generateName()">Generate Name</button>
+                </form>
+                <div class="result-frame">
+                    <p id="result" class="hidden">Your baby name will appear here!</p>
+                </div>
+            </div>
+            <div class="planner">
+                <h1>Diet Planner</h1>
+                <form id="diet-form"> <label for="week">Week of Pregnancy:</label> <input type="number" id="week"
+                        required> <label for="age">Age:</label> <input type="number" id="age" required> <label
+                        for="weight">Weight (kg):</label> <input type="number" id="weight" required> <button
+                        type="submit">Generate Meal Plan</button> </form>
+                <div id="meal-plan" class="meal-plan hidden">
+                    <h2>Meal Plan</h2>
+                    <p id="plan"></p>
+                </div>
+            </div>
+        </div> <!-- Tools End -->
+
+
+
+
+        <!-- Footer Start -->
+        <div class="container-fluid bg-primary text-light footer wow fadeIn" data-wow-delay="0.1s"
+            style="visibility: visible; animation-delay: 0.1s; animation-name: fadeIn;">
+            <div class="container py-5 px-lg-5">
+                <div class="row g-5">
+                    <div class="col-md-6 col-lg-3">
+                        <h4 class="text-white mb-4">Give Your Feedback</h4>
+                        <p><i class="fa fa-map-marker-alt me-3"></i>Dhaka, Bangladesh</p>
+                        <p><i class="fa fa-phone-alt me-3"></i>+012 345 67890</p>
+                        <p><i class="fa fa-envelope me-3"></i>ilora.lamisa@gmail.com</p>
+                        <div class="d-flex pt-2">
+                            <a class="btn btn-outline-light btn-social" href=""><i class="fab fa-facebook-f"></i></a>
+                            <a class="btn btn-outline-light btn-social" href=""><i class="fab fa-github-square"></i></a>
+                            <a class="btn btn-outline-light btn-social" href=""><i class="fab fa-linkedin-in"></i></a>
+                        </div>
+                    </div>
+
+
+                </div>
+            </div>
+            <div class="container px-lg-5">
+                <div class="copyright">
+                    <div class="row">
+
+
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Footer End -->
+
+
+        <!-- chatbot -->
+        <div class="chatBot">
+            <div class="chatBotHeading">
+                <label for="chatTextBox" id="chatOpenTrigger" class=""><img
+                    src="{{ url_for('static', filename='img/chaticon.png') }}" alt="Send" srcset=""></button>
+            </div>
+            <hr class="">
+            <div class="chatBody">
+                <div class="chatSession">
+                </div>
+            </div>
+            <form class="chatForm" autocomplete="off">
+                <div class="typingArea">
+                    <textarea name="chatInput" id="chatTextBox" class="textArea"
+                        onblur="if(!validateMessage()) this.value = 'Type here...'"
+                        onfocus="if(!validateMessage()) this.value = ''"></textarea>
+                    <button type="submit" class="sendButton" id="sendButton"><img
+                        src="{{ url_for('static', filename='img/send.svg') }}" alt="Send" srcset=""></button>
+                </div>
+                <button type="button" id="chatCloseTrigger">Close Chat!</button>
+            </form>
+        </div>
+        <script src="{{ url_for('static', filename='js/chatBotConversation.js') }}"></script>
+        <script src="{{ url_for('static', filename='js/chatBotValidate.js') }}"></script>
+        <script src="{{ url_for('static', filename='js/chatBotAnimate.js') }}"></script>
+
+    </div>
+
+    <!-- JavaScript Libraries -->
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="{{ url_for('static', filename='lib/wow/wow.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='lib/easing/easing.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='lib/waypoints/waypoints.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='lib/counterup/counterup.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='lib/owlcarousel/owl.carousel.min.js') }}"></script>
+
+    <!-- Template Javascript -->
+    <script src="{{ url_for('static', filename='js/main.js') }} "></script>
+    <script>
+        document.getElementById('dueDateForm').addEventListener('submit', function (e) {
+            e.preventDefault();
+
+            const lastPeriodDate = new Date(document.getElementById('lastPeriodDate').value);
+            const dueDate = new Date(lastPeriodDate);
+            dueDate.setDate(dueDate.getDate() + 280);
+
+            const today = new Date();
+            const pregnancyDayCount = Math.floor((today - lastPeriodDate) / (1000 * 60 * 60 * 24));
+            const pregnancyWeek = Math.floor(pregnancyDayCount / 7);
+
+            document.getElementById('dueDate').textContent = `Due Date: ${dueDate.toDateString()}`;
+            document.getElementById('pregnancyWeek').textContent = `You are in week: ${pregnancyWeek}`;
+
+            const babyCondition = document.getElementById('babyCondition');
+            babyCondition.innerHTML = getBabyCondition(pregnancyWeek);
+
+            const resultFrame = document.getElementById('resultFrame');
+            resultFrame.classList.remove('hidden');
+            resultFrame.classList.add('fade-in');
+        });
+
+        document.getElementById('ovulationForm').addEventListener('submit', function (e) {
+            e.preventDefault();
+
+            const cycleLength = parseInt(document.getElementById('cycleLength').value);
+            const periodStartDate = new Date(document.getElementById('periodStartDate').value);
+            const ovulationDate = new Date(periodStartDate);
+            ovulationDate.setDate(ovulationDate.getDate() + (cycleLength / 2));
+
+            document.getElementById('ovulationDate').textContent = `Estimated Ovulation Date: ${ovulationDate.toDateString()}`;
+
+            const ovulationResultFrame = document.getElementById('ovulationResultFrame');
+            ovulationResultFrame.classList.remove('hidden');
+            ovulationResultFrame.classList.add('fade-in');
+        });
+
+        function getBabyCondition(week) {
+            const conditions = {
+                1: 'In the first week, the baby is a tiny ball of cells.',
+                2: 'In the second week, the baby is growing rapidly.',
+                3: 'By the third week, the fertilized egg has attached to the uterus.',
+                4: 'In the fourth week, the baby is developing the basic structures of the body.',
+                5: 'By the fifth week, the baby’s heart starts to beat.',
+                6: 'In the sixth week, the baby’s facial features begin to form.',
+                7: 'By the seventh week, the baby’s major organs are starting to develop.',
+                8: 'In the eighth week, the baby starts to look more like a human.',
+                9: 'By the ninth week, the baby’s muscles and nerves begin to function.',
+                10: 'In the tenth week, the baby is practicing swallowing.',
+                11: 'By the eleventh week, the baby’s fingers and toes are separating.',
+                12: 'In the twelfth week, the baby’s kidneys start to produce urine.',
+                13: 'By the thirteenth week, the baby is growing hair follicles.',
+                14: 'In the fourteenth week, the baby’s liver starts producing bile.',
+                15: 'By the fifteenth week, the baby’s skeletal system is developing rapidly.',
+                16: 'In the sixteenth week, the baby’s eyes can move.',
+                17: 'By the seventeenth week, the baby’s heart is pumping blood effectively.',
+                18: 'In the eighteenth week, the baby’s ears begin to stand out from the head.',
+                19: 'By the nineteenth week, the baby’s skin starts to develop a protective coating.',
+                20: 'In the twentieth week, the baby’s legs are now in proportion with the rest of the body.',
+                21: 'By the twenty-first week, the baby’s eyebrows and eyelids are fully formed.',
+                22: 'In the twenty-second week, the baby’s lips and taste buds are developing.',
+                23: 'By the twenty-third week, the baby’s lungs are developing to prepare for breathing.',
+                24: 'In the twenty-fourth week, the baby’s skin is becoming less translucent.',
+                25: 'By the twenty-fifth week, the baby’s nostrils are starting to open.',
+                26: 'In the twenty-sixth week, the baby’s nervous system is developing further.',
+                27: 'By the twenty-seventh week, the baby is practicing inhaling and exhaling.',
+                28: 'In the twenty-eighth week, the baby’s eyes can partially open and respond to light.',
+                29: 'By the twenty-ninth week, the baby’s bones are fully developed, but still soft.',
+                30: 'In the thirtieth week, the baby is gaining more fat.',
+                31: 'By the thirty-first week, the baby’s brain is developing rapidly.',
+                32: 'In the thirty-second week, the baby is getting ready for a growth spurt.',
+                33: 'By the thirty-third week, the baby’s pupils can now detect light.',
+                34: 'In the thirty-fourth week, the baby’s fingernails have reached the fingertips.',
+                35: 'By the thirty-fifth week, the baby is gaining about half a pound a week.',
+                36: 'In the thirty-sixth week, the baby is practicing more coordinated breathing.',
+                37: 'By the thirty-seventh week, the baby is considered early term.',
+                38: 'In the thirty-eighth week, the baby is readying for birth.',
+                39: 'By the thirty-ninth week, the baby is full term and ready to be born.',
+                40: 'In the fortieth week, the baby is full term and ready for birth.'
+            };
+            return conditions[week] || 'Detailed condition not available for this week.';
+        }
+        const names = [
+            { name: "Aisha", gender: "Female", meaning: "Living, life" },
+            { name: "Anika", gender: "Female", meaning: "Grace, favour" },
+            { name: "Ashraf", gender: "Male", meaning: "Most honorable" },
+            { name: "Azhar", gender: "Male", meaning: "Shining, luminous" },
+            { name: "Barakat", gender: "Male", meaning: "Blessings" },
+            { name: "Farida", gender: "Female", meaning: "Unique, matchless" },
+            { name: "Habiba", gender: "Female", meaning: "Beloved, sweetheart" },
+            { name: "Hadi", gender: "Male", meaning: "Guide to righteousness" },
+            { name: "Imran", gender: "Male", meaning: "Prosperity, thriving" },
+            { name: "Jannat", gender: "Female", meaning: "Heaven, paradise" },
+            { name: "Khalid", gender: "Male", meaning: "Eternal, everlasting" },
+            { name: "Mariam", gender: "Female", meaning: "Beloved, wished-for child" },
+            { name: "Nabila", gender: "Female", meaning: "Noble, honorable" },
+            { name: "Nasir", gender: "Male", meaning: "Helper, supporter" },
+            { name: "Noor", gender: "Female", meaning: "Light" },
+            { name: "Rahman", gender: "Male", meaning: "Merciful, compassionate" },
+            { name: "Rashid", gender: "Male", meaning: "Righteous, rightly guided" },
+            { name: "Razia", gender: "Female", meaning: "Content, satisfied" },
+            { name: "Saif", gender: "Male", meaning: "Sword" },
+            { name: "Sajida", gender: "Female", meaning: "One who prostrates in worship" },
+            { name: "Shakira", gender: "Female", meaning: "Thankful, grateful" },
+            { name: "Tariq", gender: "Male", meaning: "Morning star" },
+            { name: "Yasmin", gender: "Female", meaning: "Jasmine flower" },
+            { name: "Zain", gender: "Male", meaning: "Beauty, grace" },
+            { name: "Zara", gender: "Female", meaning: "Princess, flower" },
+            { name: "Zayed", gender: "Male", meaning: "Growth, abundance" },
+            { name: "Zara", gender: "Female", meaning: "Princess, flower" },
+            { name: "Samira", gender: "Female", meaning: "Companion in evening talk" },
+            { name: "Bilal", gender: "Male", meaning: "Moistening, refreshing" },
+            { name: "Adil", gender: "Male", meaning: "Just, fair" }
+        ];
+
+        function generateName() {
+            const gender = document.getElementById('gender').value;
+            const letter = document.getElementById('letter').value.toUpperCase();
+            const filteredNames = names.filter(name =>
+                (!gender || name.gender === gender) &&
+                (!letter || name.name.startsWith(letter))
+            );
+
+            const randomIndex = Math.floor(Math.random() * filteredNames.length);
+            const result = document.getElementById('result');
+
+            if (filteredNames.length > 0) {
+                result.textContent = `Name: ${filteredNames[randomIndex].name}, Meaning: ${filteredNames[randomIndex].meaning}`;
+            } else {
+                result.textContent = "No names found!";
+            }
+
+            result.classList.remove('hidden');
+            result.classList.add('fadeIn');
+        }
+        document.getElementById('diet-form').addEventListener('submit', function (event) {
+            event.preventDefault();
+            const week = parseInt(document.getElementById('week').value);
+            const age = parseInt(document.getElementById('age').value);
+            const weight = parseInt(document.getElementById('weight').value);
+
+            let mealPlan = "";
+
+            if (week <= 12) { mealPlan = ` <b>First Trimester:</b> <br> Breakfast: Whole-grain toast with avocado (Calories: 250, Protein: 6g, Carbs: 30g, Fats: 12g) <br> Snack: Smoothie with spinach and banana (Calories: 150, Protein: 3g, Carbs: 35g, Fats: 1g) <br> Lunch: Lentil soup with mixed greens (Calories: 300, Protein: 15g, Carbs: 50g, Fats: 5g) <br> Snack: Nuts and seeds mix (Calories: 200, Protein: 6g, Carbs: 10g, Fats: 18g) <br> Dinner: Grilled chicken with quinoa (Calories: 350, Protein: 30g, Carbs: 40g, Fats: 10g) `; }
+            else if (week <= 28) { mealPlan = ` <b>Second Trimester:</b> <br> Breakfast: Oatmeal with fresh berries (Calories: 300, Protein: 8g, Carbs: 50g, Fats: 6g) <br> Snack: Greek yogurt with honey (Calories: 100, Protein: 10g, Carbs: 15g, Fats: 0g) <br> Lunch: Turkey and cheese sandwich (Calories: 400, Protein: 20g, Carbs: 50g, Fats: 15g) <br> Snack: Carrot sticks with hummus (Calories: 150, Protein: 4g, Carbs: 20g, Fats: 8g) <br> Dinner: Baked salmon with brown rice (Calories: 500, Protein: 35g, Carbs: 60g, Fats: 15g) `; }
+            else { mealPlan = ` <b>Third Trimester:</b> <br> Breakfast: Scrambled eggs with vegetables (Calories: 250, Protein: 15g, Carbs: 10g, Fats: 18g) <br> Snack: Apple slices with almond butter (Calories: 200, Protein: 5g, Carbs: 25g, Fats: 10g) <br> Lunch: Chicken and vegetable stir-fry (Calories: 400, Protein: 30g, Carbs: 50g, Fats: 12g) <br> Snack: Cheese and whole-grain crackers (Calories: 150, Protein: 8g, Carbs: 15g, Fats: 7g) <br> Dinner: Beef stew with potatoes (Calories: 500, Protein: 40g, Carbs: 45g, Fats: 20g) `; }
+            document.getElementById('plan').innerHTML = mealPlan;
+            document.getElementById('meal-plan').classList.remove('hidden');
+        });
+
+    </script>
+
+
+</body>
+
+</html>

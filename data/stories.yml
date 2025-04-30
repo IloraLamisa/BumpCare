@@ -1,0 +1,422 @@
+version: "3.1"
+
+stories:
+
+- story: mood_great & not_well path
+  steps:
+    - intent: not_well
+    - action: utter_not_well
+    - intent: mood_great
+    - action: utter_happy
+
+- story: Suggest_near_me_hospitals
+  steps:
+    - intent: hospitals_near
+    - action: utter_hospitals_near
+
+- story: health tips path
+  steps:
+    - intent: health_tips
+    - action: utter_health_tips
+    - action: utter_anything_else
+    - intent: deny
+    - action: utter_goodbye
+
+
+# Meal recommendations--------------------------
+
+# Meal plan 
+- story: user_asks_for_meal_plan
+  steps:
+    - intent: ask_meal_plan
+    - action: utter_ask_trimester
+    - intent: inform_trimester
+      entities:
+        - trimester
+    - slot_was_set:
+        - trimester: first
+    - action: action_provide_meal_plan
+    - action: utter_hydration_important
+
+- story: user_asks_for_meal_plan
+  steps:
+    - intent: ask_meal_plan
+    - action: utter_ask_trimester
+    - intent: inform_trimester
+      entities:
+        - trimester
+    - slot_was_set:
+        - trimester: second
+    - action: action_provide_meal_plan
+    - action: utter_hydration_important
+
+- story: user_asks_for_meal_plan
+  steps:
+    - intent: ask_meal_plan
+    - action: utter_ask_trimester
+    - intent: inform_trimester
+      entities:
+        - trimester
+    - slot_was_set:
+        - trimester: third
+    - action: action_provide_meal_plan
+    - action: utter_hydration_important
+
+# Breakfast meal plan
+- story: suggest breakfast according to first trimester
+  steps:
+    - intent: ask_breakfast
+    - action: utter_ask_trimester
+    - intent: inform_trimester
+      entities:
+        - trimester: "first" # set as default it'll chages in action according to user results
+    - slot_was_set:
+        - trimester: "first"
+    - action: action_ask_breakfast
+    - action: utter_hydration_important
+
+- story: suggest breakfast according to second trimester
+  steps:
+    - intent: ask_breakfast
+    - action: utter_ask_trimester
+    - intent: inform_trimester
+      entities:
+        - trimester: "second" # set as default it'll chages in action according to user results
+    - slot_was_set:
+        - trimester: "second"
+    - action: action_ask_breakfast
+    - action: utter_hydration_important
+
+- story: suggest breakfast according to third trimester
+  steps:
+    - intent: ask_breakfast
+    - action: utter_ask_trimester
+    - intent: inform_trimester
+      entities:
+        - trimester: "third" # set as default it'll chages in action according to user results
+    - slot_was_set:
+        - trimester: "third"
+    - action: action_ask_breakfast
+    - action: utter_hydration_important
+
+# Lunch meal plan
+- story: suggest Lunch according to first trimester
+  steps:
+    - intent: ask_lunch
+    - action: utter_ask_trimester
+    - intent: inform_trimester
+      entities:
+        - trimester: "first"  # Let the user's input dynamically set this
+    - slot_was_set:
+        - trimester: "first"  # Slot value is dynamically set based on user input
+    - action: action_ask_lunch
+    - action: utter_hydration_important
+
+- story: suggest Lunch according to second trimester
+  steps:
+    - intent: ask_lunch
+    - action: utter_ask_trimester
+    - intent: inform_trimester
+      entities:
+        - trimester: "second"  # Let the user's input dynamically set this
+    - slot_was_set:
+        - trimester: "second"  # Slot value is dynamically set based on user input
+    - action: action_ask_lunch
+    - action: utter_hydration_important
+
+- story: suggest Lunch according to third trimester
+  steps:
+    - intent: ask_lunch
+    - action: utter_ask_trimester
+    - intent: inform_trimester
+      entities:
+        - trimester: "third"  # Let the user's input dynamically set this
+    - slot_was_set:
+        - trimester: "third"  # Slot value is dynamically set based on user input
+    - action: action_ask_lunch
+    - action: utter_hydration_important
+
+
+# Dinner meal plan
+- story: suggest Dinner according to first trimester
+  steps:
+    - intent: ask_dinner
+    - action: utter_ask_trimester
+    - intent: inform_trimester
+      entities:
+        - trimester: "first"  # set as default it'll chages in action according to user results
+    - slot_was_set:
+        - trimester: "first"
+    - action: action_ask_dinner
+    - action: utter_hydration_important
+
+- story: suggest Dinner according to second trimester
+  steps:
+    - intent: ask_dinner
+    - action: utter_ask_trimester
+    - intent: inform_trimester
+      entities:
+        - trimester: "second"  # set as default it'll chages in action according to user results
+    - slot_was_set:
+        - trimester: "second"
+    - action: action_ask_dinner
+    - action: utter_hydration_important
+
+- story: suggest Dinner according to third trimester 
+  steps:
+    - intent: ask_dinner
+    - action: utter_ask_trimester
+    - intent: inform_trimester
+      entities:
+        - trimester: "third"  # set as default it'll chages in action according to user results
+    - slot_was_set:
+        - trimester: "third"
+    - action: action_ask_dinner
+    - action: utter_hydration_important
+
+
+- story: baby development process
+  steps:
+    - intent: ask_baby_development
+    - action: utter_provide_baby_development_weeks
+    - intent: provide_baby_development_weeks
+    - action: action_provide_week_group
+
+- story: exercise tips process for 18-30
+  steps:
+    - intent: ask_exercise_tips
+    - action: utter_provide_exercise_age
+    - intent: provide_exercise_age
+      entities:
+        - age_group: "18-30"
+    - slot_was_set:
+        - age_group: "18-30"
+    - action: action_provide_age_group_info
+
+- story: exercise tips process for 31-39
+  steps:
+    - intent: ask_exercise_tips
+    - action: utter_provide_exercise_age
+    - intent: provide_exercise_age
+      entities:
+        - age_group: "31-39"
+    - slot_was_set:
+        - age_group: "31-39"
+    - action: action_provide_age_group_info
+
+- story: exercise tips process for 40+
+  steps:
+    - intent: ask_exercise_tips
+    - action: utter_provide_exercise_age
+    - intent: provide_exercise_age
+      entities:
+        - age_group: "40+"
+    - slot_was_set:
+        - age_group: "40+"
+    - action: action_provide_age_group_info
+
+
+# Doctor list suggestions as confirm
+- story: gynaecologist doctors list 
+  steps:
+  - intent: ask_gynaecologist_doctor
+  - action : utter_doctors_list
+  - intent: askfor_booking_appointment
+  - action: action_find_gynaecologist_by_day
+  - intent: confirm_appointment
+  - action: utter_gynaecologist_appointment_confirmed 
+
+# Doctor list suggestions as cancell
+- story: gynaecologist doctors list 
+  steps:
+  - intent: ask_gynaecologist_doctor
+  - action : utter_doctors_list
+  - intent: cancel_appointment
+  - action : utter_cancel_appointment
+
+- story: appointment instructions confirmation
+  steps:
+  - intent: askfor_booking_appointment
+  - action: utter_ask_appointment_day
+  - intent: ask_appointment_day
+  - action: action_find_gynaecologist_by_day
+  - intent: confirm_appointment
+  - action: utter_gynaecologist_appointment_confirmed 
+
+- story: appointment instructions cancelled
+  steps:
+  - intent: askfor_booking_appointment
+  - action: utter_ask_appointment_day
+  - intent: ask_appointment_day
+  - action: action_find_gynaecologist_by_day
+  - intent: cancel_appointment
+  - action: utter_cancel_appointment 
+
+# Main QNA
+- story: Proving health tips for Pegnency mother 1
+  steps:
+  - intent: health_tips
+  - action: utter_health_tips
+  - action: utter_anything_else
+
+
+# Random QNA -----------------------
+- story: pregnancy_tests_story
+  steps:
+  - intent: pregnancy_tests
+  - action: utter_pregnancy_tests
+
+- story: safe_painkillers_pregnancy_story
+  steps:
+  - intent: safe_painkillers_pregnancy
+  - action: utter_safe_painkillers_pregnancy
+
+- story: allergy_medication_pregnancy_story
+  steps:
+  - intent: allergy_medication_pregnancy
+  - action: utter_allergy_medication_pregnancy
+
+- story: pregnancy_avoidance_story
+  steps:
+  - intent: pregnancy_avoidance
+  - action: utter_pregnancy_avoidance
+
+- story: pregnancy_food_avoidance_story
+  steps:
+  - intent: pregnancy_food_avoidance
+  - action: utter_pregnancy_food_avoidance
+
+- story: pregnancy_yoga_story
+  steps:
+  - intent: pregnancy_yoga
+  - action: utter_pregnancy_yoga 
+
+- story: emotional_wellbeing_tips_story
+  steps:
+  - intent: emotional_wellbeing_tips
+  - action: utter_emotional_wellbeing_tips
+
+- story: stress_management_techniques_story
+  steps:
+  - intent: stress_management_techniques
+  - action: utter_stress_management_techniques
+
+- story: importance_of_sleep_story
+  steps:
+  - intent: importance_of_sleep
+  - action: utter_importance_of_sleep
+
+- story: healthy_lifestyle_habits_story
+  steps:
+  - intent: healthy_lifestyle_habits
+  - action: utter_healthy_lifestyle_habits
+
+- story: seeking_professional_help_story
+  steps:
+  - intent: seeking_professional_help
+  - action: utter_seeking_professional_help
+
+- story: common_mental_health_issues_story
+  steps:
+  - intent: common_mental_health_issues
+  - action: utter_common_mental_health_issues 
+
+- story: prenatal_vitamins_importance_story
+  steps:
+  - intent: prenatal_vitamins_importance
+  - action: utter_prenatal_vitamins_importance
+
+- story: prenatal_vitamins_story
+  steps:
+  - intent: prenatal_vitamins
+  - action: utter_prenatal_vitamins
+
+- story: pregnancy_diet_avoidance_story
+  steps:
+  - intent: pregnancy_diet_avoidance
+  - action: utter_pregnancy_diet_avoidance
+
+- story: pregnancy_diet_focus_story
+  steps:
+  - intent: pregnancy_diet_focus
+  - action: utter_pregnancy_diet_focus
+
+- story: folic_acid_importance_story
+  steps:
+  - intent: folic_acid_importance
+  - action: utter_folic_acid_importance
+
+- story: iron_rich_foods_story
+  steps:
+  - intent: iron_rich_foods
+  - action: utter_iron_rich_foods
+
+- story: calcium_intake_story
+  steps:
+  - intent: calcium_intake
+  - action: utter_calcium_intake
+
+- story: dietary_changes_first_trimester_story
+  steps:
+  - intent: dietary_changes_first_trimester
+  - action: utter_dietary_changes_first_trimester
+
+- story: calorie_needs_second_trimester_story
+  steps:
+  - intent: calorie_needs_second_trimester
+  - action: utter_calorie_needs_second_trimester
+
+- story: calcium_iron_third_trimester_story
+  steps:
+  - intent: calcium_iron_third_trimester
+  - action: utter_calcium_iron_third_trimester
+
+- story: age_related_dietary_needs_story
+  steps:
+  - intent: age_related_dietary_needs
+  - action: utter_age_related_dietary_needs
+
+- story: weight_pregnancy_diet_story
+  steps:
+  - intent: weight_pregnancy_diet
+  - action: utter_weight_pregnancy_diet
+
+- story: daily_water_intake_story
+  steps:
+  - intent: daily_water_intake
+  - action: utter_daily_water_intake
+
+- story: sushi_deli_meat_pregnancy_story
+  steps:
+  - intent: sushi_deli_meat_pregnancy
+  - action: utter_sushi_deli_meat_pregnancy
+
+- story: calcium_iron_needs_story
+  steps:
+  - intent: calcium_iron_needs
+  - action: utter_calcium_iron_needs 
+
+- story: period_cramps_story
+  steps:
+  - intent: period_cramps
+  - action: utter_period_cramps
+
+- story: menstrual_cycle_story
+  steps:
+  - intent: menstrual_cycle
+  - action: utter_menstrual_cycle
+
+- story: abdominal_pain_story
+  steps:
+  - intent: abdominal_pain
+  - action: utter_abdominal_pain
+
+
+
+
+
+
+
+
+
+

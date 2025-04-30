@@ -1,0 +1,732 @@
+version: "3.1"
+
+intents:
+  - greet
+  - goodbye
+  - affirm
+  - deny
+  - mood_great
+  - not_well
+  - bot_challenge
+  - out_of_scope
+  - say_thanks
+  - want_to_ask_question
+  - hospitals_near
+  - health_tips
+  - how_are_you_doing
+  - ask_exercise_tips
+  - ask_meal_plan
+  - inform_trimester
+  - ask_breakfast
+  - ask_lunch
+  - ask_dinner
+  - ask_baby_development
+  - provide_exercise_age
+  - provide_baby_development_weeks
+  - ask_gynaecologist_doctor
+  - askfor_booking_appointment
+  - ask_appointment_day
+  - confirm_appointment
+  - cancel_appointment 
+  # Random ---
+  - pregnancy_yoga
+  - pregnancy_food_avoidance
+  - pregnancy_avoidance
+  - allergy_medication_pregnancy
+  - safe_painkillers_pregnancy
+  - pregnancy_tests
+  - emotional_wellbeing_tips
+  - stress_management_techniques
+  - importance_of_sleep
+  - healthy_lifestyle_habits
+  - seeking_professional_help
+  - common_mental_health_issues
+  - prenatal_vitamins_importance
+  - prenatal_vitamins
+  - pregnancy_diet_avoidance
+  - pregnancy_diet_focus
+  - folic_acid_importance
+  - iron_rich_foods
+  - calcium_intake
+  - dietary_changes_first_trimester
+  - calorie_needs_second_trimester
+  - calcium_iron_third_trimester
+  - age_related_dietary_needs
+  - weight_pregnancy_diet
+  - daily_water_intake
+  - sushi_deli_meat_pregnancy
+  - calcium_iron_needs
+  - period_cramps
+  - menstrual_cycle
+  - abdominal_pain
+
+
+actions:
+  - utter_greet
+  - utter_question
+  - utter_goodbye
+  - utter_iamabot
+  - utter_not_well
+  - utter_anything_else
+  - utter_ask_question
+  - utter_did_that_help
+  - utter_happy
+  - utter_health_tips
+  - utter_please_rephrase
+  - utter_how_are_you_doing
+  - utter_hospitals_near
+  - utter_provide_exercise_age
+  - utter_wrong_data
+  - utter_welcome
+  # actions
+  - action_provide_meal_plan
+  - action_ask_breakfast
+  - action_ask_lunch
+  - action_ask_dinner
+  - action_find_gynaecologist_by_day
+  - action_provide_age_group_info
+  - action_provide_week_group
+  - action_save_appointment
+  - action_retrieve_appointments
+  # Meal plan -----------
+  - utter_ask_trimester
+  - utter_hydration_important
+  - utter_first_trimester_breakfast
+  - utter_second_trimester_breakfast
+  - utter_third_trimester_breakfast
+  - utter_first_trimester_lunch
+  - utter_second_trimester_lunch
+  - utter_third_trimester_lunch
+  - utter_first_trimester_dinner
+  - utter_second_trimester_dinner
+  - utter_third_trimester_dinner
+  - utter_provide_baby_development_weeks
+  - utter_ask_appointment_day
+  - utter_gynaecologist_appointment_confirmed
+  - utter_cancel_appointment 
+  - utter_gynaecologist_Satarday_Sunday
+  - utter_gynaecologist_Monday_tuesday
+  - utter_gynaecologist_wednesday_thursday
+  - utter_gynaecologist_Friday
+  - utter_doctors_list
+  # Random QNA
+  - utter_pregnancy_tests
+  - utter_safe_painkillers_pregnancy
+  - utter_allergy_medication_pregnancy
+  - utter_pregnancy_avoidance
+  - utter_pregnancy_food_avoidance
+  - utter_pregnancy_yoga
+  # -----
+  - utter_prenatal_vitamins_importance
+  - utter_prenatal_vitamins
+  - utter_pregnancy_diet_avoidance
+  - utter_pregnancy_diet_focus
+  - utter_folic_acid_importance
+  - utter_iron_rich_foods
+  - utter_calcium_intake
+  - utter_dietary_changes_first_trimester
+  - utter_calorie_needs_second_trimester
+  - utter_calcium_iron_third_trimester
+  - utter_age_related_dietary_needs
+  - utter_weight_pregnancy_diet
+  - utter_daily_water_intake
+  - utter_sushi_deli_meat_pregnancy
+  - utter_calcium_iron_needs 
+  - utter_emotional_wellbeing_tips
+  - utter_stress_management_techniques
+  - utter_importance_of_sleep
+  - utter_healthy_lifestyle_habits
+  - utter_seeking_professional_help
+  - utter_common_mental_health_issues
+  - utter_period_cramps
+  - utter_menstrual_cycle
+  - utter_abdominal_pain
+
+
+entities:
+  - trimester
+  - age_group
+  - week_group
+
+slots:
+  age_group:
+    type: text
+    influence_conversation: false
+    mappings:
+      - type: from_text
+        entity: age_group
+  week_group:
+    type: text
+    influence_conversation: false
+    mappings:
+      - type: from_text
+        entity: week_group
+  trimester:
+    type: text
+    influence_conversation: false
+    mappings:
+      - type: from_entity
+        entity: trimester
+
+
+
+responses:
+  utter_greet:
+    - text: "Hey!👋 AI Assistant here, How can I help you today?"
+    - text: "Hi!👋 I am Medibot, How can I help you today?"
+    - text: "Hi,👋 I am Medicbot. How can I help you?"
+    - text: "Hi and Welcome!👋 Medibot AI Assistant is ready to help you here."
+    - text: "Hey!👋 How are you feeling today?"
+    - text: "Hi!👋 How can I help?"
+    - text: "Hello!👋 What are you looking for?"
+    - text: "Hello!👋 How can I help you today?"
+
+  utter_question:
+    - text: "Please ask me about Nutrition, Exercise, Medical safety, Doctors suggestions, Meal plan, Health tips and Emotional Well-being, menstrual cycle, period cramps Pregnancy related basic QNA during pregnancy to support maternal and child health."
+
+  utter_did_that_help:
+    - text: "Did that help you?"
+    - text: "Did that help?"
+    - text: "Did that solve your problem?"
+    - text: "Did that solve your query?"
+
+  utter_wrong_data:
+    - text: "Thanks for your feedback."
+    - text: "Sorry! I will try to be better next time. Anything else?"
+    - text: "Okay! I will try to learn from this. Anything else?"
+
+  utter_please_rephrase:
+    - text: "I'm sorry, I didn't quite understand that. Could you rephrase?"
+    - text: "Sorry! I didn't get what you said. Ask me about pregnancy-related queries."
+    - text: "You are going off-topic! Ask me about pregnancy-related queries."
+    - text: "Sorry! I am not trained for this. Ask me about pregnancy-related queries."
+
+  utter_anything_else:
+    - text: "Is there anything else I can help you with?"
+
+  utter_ask_question:
+    - text: "Ok, sure, you may continue to ask me."
+    - text: "Ok, go ahead and ask me."
+    - text: "Ok, what's your query?"
+    - text: "Ok, what's your question?"
+    - text: "Ok, what's your problem?"
+    - text: "Ok, what's your issue?"
+
+  utter_how_are_you_doing:
+    - text: "doing great, thanks for your concern. And you?"
+    - text: "Amazing, and what about you? and What about you?"
+    - text: "Awesome, thanks for your concern. How are you doing today?"
+    - text: "great, thanks for your concern. How are you doing today?"
+    - text: "Feeling good, thanks for your concern. How are you doing today?"
+
+  utter_goodbye:
+    - text: "Great helping you! Bye."
+    - text: "Bye"
+    - text: "Goodbye! Take care"
+    - text: "See ya"
+    - text: "Enjoy your day!"
+    - text: "Sayonara!"
+
+  utter_iamabot:
+    - text: "I am a bot, powered by Rasa."
+
+  utter_welcome: 
+    - text: "your are Welcome!"
+
+  utter_happy: 
+    - text: "Glad to know about yourself."
+    - text: "That’s wonderful to hear! Keep up the positivity!"
+    - text: "I’m so happy to hear that! How can I assist you further?"
+    - text: "That’s great! I hope you continue feeling this way."
+    - text: "I’m glad to know you’re doing well. Is there anything else I can help with?"
+    - text: "Hearing that makes my day! Let’s keep the good energy going."
+    - text: "I’m so pleased to hear that! What’s next on your mind?"
+    - text: "That’s fantastic! It’s always good to hear positive news."
+  
+  utter_not_well: 
+    - text: "Sorry to know about yourself. Can you tell me about your problems?"
+    - text: "I’m here to help you. Would you like to share what’s troubling you?"
+    - text: "It’s okay to feel this way. Could you tell me more about what’s on your mind?"
+    - text: "I’m here to listen. Please feel free to share what you’re going through."
+    - text: "I’m sorry to hear that. Let’s work together to understand what’s bothering you."
+    - text: "Thank you for sharing. Can you tell me more about how you’re feeling?"
+    - text: "It sounds like you’re having a tough time. Would you like to talk about it?"
+    - text: "I care about your well-being. Please let me know how I can support you."
+
+  utter_hospitals_near:
+    - text: Here is <strong>Google map</strong> - <a class="map" href="https://www.google.com/maps/search/hospitals+near+me/" target="_blank"><strong>View Hospitals</strong> </a> <br> <br> Or Scan QR Code to view in your mobile. <br> <img class="fitted" src="../static/img/QR.png" alt="Hospitals Near Me" width="80" height="80">
+
+  utter_provide_exercise_age: 
+    - text: "Could you please provide your age group? <strong>(e.g., 18-30, 31-39, 40+)</strong>"
+
+  utter_provide_baby_development_weeks: 
+    - text: "Could you please provide your week of pregnency? <strong>(e.g., 1-13, 14-26, 27+)</strong>"
+
+
+# Meal recommendations -------------------------
+
+  utter_ask_trimester:
+    - text: "How far along are you in your pregnancy trimester? <strong>(e.g., first | second | third )</strong>"
+
+  utter_first_trimester_breakfast:
+    - text: |
+        Here are a few nutritious and <strong> tasty breakfast</strong> options to start your day:
+        Option 1: Oatmeal with ground flaxseeds, almond butter, and sliced banana 🍌. Packed with omega-3s and potassium!
+        Option 2: Whole grain toast topped with avocado and a poached egg 🥑🍳 for healthy fats and protein.
+
+  utter_second_trimester_breakfast:
+    - text: |
+        Here are a few nutritious and tasty breakfast options to start your day:<br>
+        1: Scrambled eggs with spinach, whole grain toast, and orange slices 🍊. Great for folate and protein!<br>
+        2: A smoothie with kale, banana, protein powder, chia seeds, and almond milk 🥒🥛. Loaded with omega-3s and potassium.
+
+  utter_third_trimester_breakfast:
+    - text: |
+        Here are a few nutritious and tasty breakfast options to start your day: <br>
+        1: Whole grain waffles with peanut butter and sliced strawberries 🍓. Fiber and protein-packed!<br>
+        2: Greek yogurt parfait with granola, chia seeds, and blueberries 🥒🥦. High in calcium and omega-3s.
+
+  utter_first_trimester_lunch:
+    - text: |
+       <strong> For lunch, </strong> you can try: <br>
+        1. Grilled chicken or tofu salad with leafy greens like spinach or kale, cucumber, and tomatoes. These are rich in folate and protein.<br>
+        2. A quinoa salad with chickpeas, mixed greens, and a lemon dressing for extra fiber and plant-based protein.
+
+  utter_second_trimester_lunch:
+    - text: |
+        <strong>For lunch,</strong> you can try:<br>
+        1. Grilled turkey wrap with avocado and a side of mixed fruit.<br>
+        2. A bowl of brown rice with steamed broccoli, grilled shrimp, and a drizzle of soy sauce.
+
+  utter_third_trimester_lunch:
+    - text: |
+       <strong> For lunch,</strong> you can try:<br>
+        1. A whole-grain sandwich with turkey, spinach, and mustard, with a small side salad.<br>
+        2. A hearty bowl of minestrone soup with whole-grain crackers.
+
+  utter_first_trimester_dinner:
+    - text: |
+        <strong>For dinner,</strong> you could go with:<br>
+        1. Grilled salmon with roasted sweet potatoes and steamed broccoli. The salmon is packed with omega-3s, and sweet potatoes provide vitamin A.<br>
+        2. A hearty lentil stew with spinach, tomatoes, and whole-grain bread. Lentils are a great source of iron and folate.
+
+  utter_second_trimester_dinner:
+    - text: |
+        <strong>For dinner,</strong> you could go with:<br>
+        1. Baked chicken with a quinoa pilaf and steamed green beans.<br>
+        2. A stir-fry with tofu, mixed vegetables, and brown rice.
+
+  utter_third_trimester_dinner:
+    - text: |
+        <strong>For dinner,</strong> you could go with:<br>
+        1. Grilled fish tacos with cabbage slaw and a squeeze of lime.<br>
+        2. A baked potato topped with chili made from ground turkey and beans, with a side of steamed asparagus.
+
+  utter_hydration_important:
+    - text: "<strong> Make sure to drink plenty of water too, as hydration is key for healthy pregnancy.</strong>" 
+
+  utter_show_excercise_img:
+    - text: <strong>Excercise Video Recomendation</strong> <br> <br> <img class="fitted" src="../static/img/excercise_rdm.png" alt="Hospitals Near Me" width="80" height="80">
+
+  utter_18_30_exercise:
+    - text: |
+       <strong>Here are some exercise recommendations for ages 18-29:</strong> <br>
+       1. Walking: Great for cardiovascular health without joint strain. <br>
+       2. Prenatal Yoga: Enhances flexibility, reduces stress, and prepares for childbirth (if applicable).<br>
+       3. Swimming: Provides a full-body workout and reduces swelling. <br><br>
+
+       <strong>Watch a recommended exercise video:</strong> <br>
+       <a href="https://www.youtube.com/watch?v=Ia6dNwVs1M8" target="_blank">
+         <img class="fitted" src="https://img.youtube.com/vi/Ia6dNwVs1M8/0.jpg" alt="Exercise Video" width="300" />
+       </a>
+
+  utter_31_39_exercise:
+    - text: |
+       <strong> Recommended Exercises for ages 30-39:</strong> <br>
+       1. Pilates: Strengthens core muscles and improves posture. <br>
+       2. Stationary Cycling: Good cardiovascular exercise that's gentle on joints. <br>
+       3. Light Weight Training: Helps maintain muscle tone and strength. <br><br>
+      
+       <strong>Watch a recommended exercise video:</strong> <br> <br>
+       <a href="https://www.youtube.com/watch?v=XhqntqSGKsc&pp=ygUdZXhjZXJzaXplIGZvciBwcmVnbmFudCB3b21hbiA%3D" target="_blank">
+         <img class="fitted" src="https://img.youtube.com/vi/XhqntqSGKsc/0.jpg" alt="Exercise Video" width="300" />
+       </a>
+
+  utter_40_plus_exercise:
+    - text: |
+       <strong>Recommended Exercises for ages 40 and above:</strong> <br>
+       1. Gentle Stretching: Keeps muscles flexible and reduces discomfort. <br>
+       2. Aqua Aerobics: Low-impact exercise that's easy on joints and supports weight. <br>
+       3. Prenatal Tai Chi (if applicable): Improves balance, flexibility, and relaxation. <br><br>
+      
+       <strong>Watch a recommended exercise video:</strong> <br> <br>
+       <a href="https://www.youtube.com/watch?v=qkhLev3bKd0&pp=ygUdZXhjZXJzaXplIGZvciBwcmVnbmFudCB3b21hbiA%3D" target="_blank">
+         <img class="fitted" src="https://img.youtube.com/vi/qkhLev3bKd0/0.jpg" alt="Exercise Video" width="300" />
+       </a>
+
+  utter_baby_development_week:
+    - text: |
+        Here's the development update for week {week}: 
+        **Baby’s Size**: {baby_size}
+        **Growth Milestones**: {growth_milestones}
+        **Mother’s Body**: {mothers_body}
+
+  utter_Weeks_1_13_baby_development:
+    - text: |
+        <strong>First Trimester (Weeks 1-13):</strong><br>
+        - Weeks 1-4 : Baby’s size is like a poppy seed.approximately 0.1 cm (0.04 inches). Growth Milestones: Conception occurs, the fertilized egg implants in the uterus, and the neural tube begins to form.<br>
+        - Weeks 5-8 : Baby’s size grows to that of a raspberry.around 1.3 cm (0.5 inches) Major organs start forming.<br>
+        - Weeks 9-12 : Baby’s size is like a lime. Around 2.5-5.5cm Reflexes develop, and nails start forming.<br>
+
+        <br> <img class="fitted" src="../static/img/baby_dev_1_15.png" alt="Hospitals Near Me" width="80" height="80">
+
+  utter_Weeks_14_26_baby_development:
+    - text: |
+        <strong>Second Trimester (Weeks 14-26):</strong><br>
+        - Weeks 13-16 : Baby is the size of an avocado.  7.5-11.5 cm Facial expressions develop.<br>
+        - Weeks 17-20 : Baby is the size of a banana.13-16.5cm Vernix starts forming.<br>
+        - Weeks 21-24 : Baby is the size of corn. 26.5-30 cm.Lungs are forming, and breathing movements begin.<br>
+
+         <br> <img class="fitted" src="../static/img/baby_dev_14_26.png" alt="Hospitals Near Me" width="80" height="80">
+
+  utter_Weeks_27_40_baby_development:
+    - text: |
+        <strong>Third Trimester (Weeks 27-40):</strong><br>
+        - Weeks 25-28 : Baby is the size of an eggplant. 33-37.5 cm.Rapid brain development occurs.<br>
+        - Weeks 29-32 : Baby is the size of a squash.38.5-42.5cm Bones are fully developed but soft.<br>
+        - Weeks 33-36 : Baby is the size of a pineapple.  43.5-47.5cmBaby gains weight rapidly.<br>
+        - Weeks 37-40 : Baby is the size of a watermelon.48.5-52cm. Baby is preparing for birth and lungs are fully developed.<br>
+
+         <br> <img class="fitted" src="../static/img/pregnency_progress_27_40.png" alt="Hospitals Near Me" width="80" height="80">
+
+
+# Questions About Pregnancy TimeLine
+# Early Pregnancy (First Trimester: Weeks 1-12)
+
+  utter_health_tips:
+    - text: "Sure! Here are some <strong>Health tips for you:</strong> <br> 1. Drink plenty of water. <br> 2. Eat a balanced diet. <br> 3. Get enough sleep. <br> 4. Exercise regularly. <br> 5. Avoid smoking and limit alcohol. <br>6. Manage stress. <br>7. Maintain a healthy weight. <br> 8. Wash your hands frequently. <br> 9. Get regular check-ups. <br> 10. Avoid exposure to germs. <br> 11. Avoid exposure to pollution. <br> 12. Avoid exposure to chemicals. <br> 13. Avoid exposure to radiation. <br> 14. Avoid exposure to loud noise. <br> 15. Avoid exposure to extreme temperatures."
+
+
+  utter_ask_appointment_day:
+    - text: "Please enter your appointment day? <strong>(e.g satarday, sunday, tomorrow, today)</strong>"
+
+  utter_doctors_list:
+    - text: |
+         Here are some Gynaecologists available near you:
+         <br><strong> 1. Dr. Sahara Arabi</strong> 
+         - MBBS (DU), DGO (BSMMU), MRCOG (P-2) London, Obs & Gynae Specialist. FCPS (P-2) Infertility
+         - Gyne Surgeon, Gynecologist
+         - 5 years experience overall. 
+         - Consultation fee at clinic: 600TK. 
+         - Address: Sector 6, HSR Layout, Bangalore. 
+         - Phone Number: +8801715295950 
+         - Timings: Monday to Tuesday, 10:00AM to 07:30PM.
+
+         <strong> 2. Dr. Sharmin Akter Liza</strong> 
+         - MBBS, FCPS (OBGYN)
+         - Gynecology, Infertility Specialist & Laparoscopic Surgeon
+         - Assistant Professor, Gynecology & Obstetrics
+         - Consultation fee at clinic: 600TK. 
+         - Address: London Market, Sanarpar, Demra, Dhaka - 1361. 
+         - Phone Number: +8801715295950 
+         - Timings: Wednesday to Thursday, 10:00AM to 07:30PM.
+
+         <strong> 3. Dr. Jobaida Sultana Susan</strong> 
+         - MBBS (DMC), BCS (Health), FCPS (OBGYN), FMAS (India)
+         - Gynecology, Obstetrics Specialist & Surgeon
+         - Consultant, Obs & Gyne
+         - Consultation fee at clinic: 600TK. 
+         - Address: Room 406, House - 66, Mirpur Road, Kalabagan, Dhaka - 1205. 
+         - Phone Number: +8801766661331 
+         - Timings: Friday 02:00AM to 06:00PM.
+
+         Do you want to book an appointment with any of these doctors? <br>
+         <strong>Reply with "Book Appointment' or 'cancel'.</strong> 
+
+  utter_gynaecologist_Satarday_Sunday:
+     - text: "Here is the Gynaecologist available near you. <br><br>Dr. Jesmin Jerin - MBBS, FCPS<br>Assistant Professor of Gyne Surgeon,  Gynecologist.<br>10 years experience overall. <br>Consultation fee at clinic 600TK. <br>Address: Sector 6, HSR Layout, Bangalore. <br>Phone Number: +01902991500 <br>Timings: SatarDay to Sunday, 10:00AM to 07:30PM. <br>Do you want to Book the appointment? <br><br><strong> Reply with confirm or cancel.</strong>"
+
+  utter_gynaecologist_Monday_tuesday:
+     - text: "Here is the Gynaecologist available near you. <br><br>Dr. Sahara Arabi - MBBS (DU), DGO (BSMMU), MRCOG (P-2) London, Obs & Gynae Specialist. FCPS (P-2) Infertility <br>Gyne Surgeon,  Gynecologist<br>5 years experience overall. <br>Consultation fee at clinic 600TK. <br>Address: Sector 6, HSR Layout, Bangalore. <br>Phone Number: +8801715295950 <br>Timings: Monday to Tuesday, 10:00AM to 07:30PM. <br><br>Do you want to Book the appointment?<br><strong> Reply with confirm or cancel.</strong>"
+
+  utter_gynaecologist_wednesday_thursday:
+     - text: "Here is the Gynaecologist available near you. <br><br>Dr. Sharmin Akter Liza - MBBS, FCPS (OBGYN) <br>Gynecology, Infertility Specialist & Laparoscopic Surgeon <br>Assistant Professor, Gynecology & Obstetrics <br>Consultation fee at clinic 600TK. <br>Address: London Market, Sanarpar, Demra, Dhaka - 1361. <br>Phone Number: +8801715295950 <br>Timings: Wednesday to thursday, 10:00AM to 07:30PM.<br><br>Do you want to Book the appointment? <br><strong> Reply with confirm or cancel.</strong>"
+
+  utter_gynaecologist_Friday:
+     - text: "Here is the Gynaecologist available near you. <br><br>Dr. Jobaida Sultana Susan - MBBS (DMC), BCS (Health), FCPS (OBGYN), FMAS (India) <br>Gynecology, Obstetrics Specialist & Surgeon <br>Consultant, Obs & Gyne <br>Consultation fee at clinic 600TK. <br>Address: Room 406, House - 66, Mirpur Road, Kalabagan, Dhaka - 1205. <br>Phone Number: +8801766661331 <br>Timings: Friday 02:00AM to 06:00PM.<br><br>Do you want to Book the appointment? <br><strong> Reply with confirm or cancel.</strong>"
+
+  utter_gynaecologist_appointment_confirmed:
+    - text: "Great!😊 Your appointment is confirmed. <br>You can visit the clinic as per your convenience and this appointment is valid only for next 1 week. After one week you need to reregister your appointment. <br> You can download your appointment details here! <br> <img src='/static/Media/Appointments/Gynaecologist-appointment.png' alt='Gynaecologist Appointment Details' width='325' height='225'>"
+
+  utter_cancel_appointment:
+     - text: |
+          "Cool! Have a great day.😊 <br> Do you have any other questions?"
+
+
+  # Random QNA -------------
+  utter_pregnancy_tests:
+    - text: | 
+          <strong>Common tests during pregnancy include:</strong><br>
+          * Blood tests to check for anemia, blood type, and other conditions<br>
+          * Urine tests to monitor for infections and other issues<br>
+          * Ultrasounds to check the baby's development and position<br>
+          * Glucose screening to check for gestational diabetes 
+
+  utter_safe_painkillers_pregnancy:
+    - text: |
+          It depends on the painkiller. Acetaminophen (Tylenol) is generally safe, but ibuprofen (Advil) and aspirin should be avoided unless your doctor says otherwise.
+
+  utter_allergy_medication_pregnancy:
+    - text: |
+          Some allergy medications are safe, but others are not. Always consult your doctor before taking any medication, including over-the-counter allergy medications.
+
+  utter_pregnancy_avoidance:
+    - text: |
+          <strong>Here are some things to avoid during pregnancy:</strong><br>
+          * Alcohol: Can cause serious birth defects.<br>
+          * Smoking: Increases the risk of miscarriage, premature birth, and low birth weight.<br>
+          * Illegal drugs: Can have devastating effects on the developing fetus.<br>
+          * Certain medications: Some medications are not safe during pregnancy and can harm the fetus.<br>
+          * Raw or undercooked meat, fish, and eggs: Can increase the risk of foodborne illness.<br>
+          * Unpasteurized dairy products: Can contain harmful bacteria.<br>
+          * Certain types of fish: Some fish contain high levels of mercury, which can harm the developing brain and nervous system.<br>
+          * Excessive caffeine: High caffeine intake may increase the risk of miscarriage and low birth weight.<br>
+          * Unprotected sun exposure: Can increase the risk of sunburn and heatstroke.<br>
+
+  utter_pregnancy_food_avoidance:
+    - text: |
+          <strong>Here are some foods to avoid or limit during pregnancy:</strong><br>
+          * Raw or undercooked meat, poultry, and seafood.<br>
+          * Unpasteurized dairy products.<br>
+          * Certain types of fish with high mercury levels (such as shark, swordfish, king mackerel, and tilefish).<br>
+          * Deli meats and hot dogs unless heated to steaming hot.<br>
+          * Organ meats (liver, kidney).<br>
+          * Raw or undercooked eggs.<br>
+          * Excessive amounts of caffeine.<br>
+
+  utter_pregnancy_yoga:
+    - text: |
+          <strong>Here are some suitable yoga styles for pregnancy:</strong><br>
+            Prenatal Yoga: Adapted poses to support your changing body. Focuses on breathing, flexibility, and relaxation.<br>
+            Restorative Yoga:  Uses props to support the body in gentle poses. Helps reduce stress and improve sleep quality.<br>
+            Gentle Stretching: Simple stretches to maintain flexibility. Reduces muscle tightness and improves circulation.
+
+  utter_emotional_wellbeing_tips:
+      - text: |
+          <strong>Here are some tips for improving your emotional well-being:</strong><br>
+          1. Practice mindfulness: Engage in activities like meditation or deep breathing to become more aware of your thoughts and feelings.<br>
+          2. Connect with others: Spend time with loved ones, build strong relationships, and join social groups.<br>
+          3. Engage in physical activity: Exercise regularly, as it releases endorphins that have mood-boosting effects.<br>
+          4. Prioritize sleep: Aim for 7-9 hours of quality sleep per night.<br>
+          5. Eat a healthy diet: Nourish your body with whole foods, fruits, and vegetables.<br>
+          6. Set realistic goals: Break down large goals into smaller, achievable steps.<br>
+          7. Practice self-compassion: Be kind to yourself and acknowledge your strengths and limitations.<br>
+          8. Seek professional help when needed: Don't hesitate to reach out to a therapist or counselor if you're struggling.<br><br>
+
+          <strong>Watch a recommended exercise video:</strong> <br> <br>
+          <a href="https://www.youtube.com/watch?v=KvbajNOETR0" target="_blank">
+            <img class="fitted" src="https://img.youtube.com/vi/KvbajNOETR0/0.jpg" alt="Exercise Video" width="300" />
+          </a>
+
+  utter_stress_management_techniques:
+      - text: |
+          <strong>Here are some effective stress management techniques:</strong><br>
+          1. Deep breathing exercises: Practice techniques like diaphragmatic breathing to calm your nervous system.<br>
+          2. Mindfulness meditation: Focus on the present moment without judgment to reduce stress and anxiety.<br>
+          3. Progressive muscle relaxation: Tense and release different muscle groups to relieve tension.<br>
+          4. Yoga and tai chi: These mind-body practices can help reduce stress and improve overall well-being.<br>
+          5. Spending time in nature: Connect with nature through activities like hiking, walking, or gardening.<br>
+          6. Engaging in hobbies: Pursue activities you enjoy, such as reading, painting, or playing music.<br>
+          7. Social connection: Spend time with loved ones, friends, or pets.<br><br>
+
+          <strong>Watch a Stress Management Techniques video:</strong><br><br>
+          <a href="https://www.youtube.com/watch?v=9SQwSqAQ9UQ" target="_blank">
+            <img class="fitted" src="https://img.youtube.com/vi/9SQwSqAQ9UQ/0.jpg" alt="Exercise Video" width="300" />
+          </a>
+
+  utter_importance_of_sleep:
+      - text: |
+          <strong>Sleep plays a crucial role in emotional well-being. </strong>
+          When you don't get enough sleep, it can:<br>
+          * Increase feelings of stress, anxiety, and irritability.<br>
+          * Impair your ability to cope with emotions.<br>
+          * Lower your mood and increase the risk of depression.<br>
+          * Affect your concentration and decision-making abilities.<br>
+
+  utter_healthy_lifestyle_habits:
+      - text: |
+         <strong> A healthy lifestyle significantly impacts your emotional well-being. Here are some key habits:</strong>
+          * Regular exercise: Physical activity releases endorphins, which have mood-boosting effects.<br>
+          * Balanced diet: Nourishing your body with whole foods provides essential nutrients for brain function.<br>
+          * Mindfulness and meditation: These practices can help reduce stress and increase self-awareness.<br>
+          * Social connection: Maintain strong relationships with friends and family.<br>
+          * Limit screen time: Excessive screen time can negatively impact sleep and mood.
+
+  utter_seeking_professional_help:
+     - text: |
+          <strong> Here are some signs that you may need to consult a therapist: </strong><br>
+          * Persistent feelings of sadness, emptiness, or hopelessness
+
+  utter_common_mental_health_issues: 
+     - text: | 
+          <strong> Here are some signs that you may need to consult a cohort: </strong><br>
+           **Anxiety disorders: <br><br>
+              * Generalized Anxiety Disorder (GAD)
+              * Social Anxiety Disorder
+              * Panic Disorder
+              * Obsessive-Compulsive Disorder (OCD)
+          **Mood disorders: <br><br>
+              * Depression
+              * Bipolar Disorder
+          **Eating disorders: <br><br>
+              * Anorexia nervosa
+              * Bulimia nervosa
+              * Binge-eating disorder
+          **Substance abuse disorders: <br><br>
+              * Alcoholism
+              * Drug addiction
+          **Personality disorders: <br><br>
+              * Borderline Personality Disorder
+              * Narcissistic Personality Disorder
+
+  utter_prenatal_vitamins_importance:
+     - text: |
+          <strong>Prenatal vitamins are crucial </strong>because they help fill any nutritional gaps in your diet, <br>
+          ensuring you and your baby get essential nutrients. <br>
+          Folic acid helps prevent neural tube defects, and iron supports the development of the placenta and fetus. <br>
+          Prenatal vitamins also contain other important nutrients like calcium, vitamin D, and omega-3 fatty acids.<br>
+
+  utter_prenatal_vitamins:
+    - text: |
+          <strong>Look for prenatal vitamins that contain:</strong><br>
+          * Folic acid (400-800 micrograms)<br>
+          * Iron (27 milligrams)<br>
+          * Calcium (1,000 milligrams)<br>
+          * Vitamin D (600 IU)<br>
+          * Omega-3 fatty acids (if you don't eat fish)<br>
+
+  utter_pregnancy_diet_avoidance:
+    - text: | 
+          <strong>Here are some foods to avoid or limit during pregnancy:</strong><br>
+          * Raw or undercooked meat, poultry, and seafood.<br>
+          * Unpasteurized dairy products.<br>
+          * Certain types of fish with high mercury levels (such as shark, swordfish, king mackerel, and tilefish).<br>
+          * Deli meats and hot dogs unless heated to steaming hot.<br>
+          * Organ meats (liver, kidney).<br>
+          * Raw or undercooked eggs.<br>
+          * Excessive amounts of caffeine.<br>
+
+  utter_pregnancy_diet_focus:
+    - text: |
+          <strong>Focus on a balanced diet </strong>rich in fruits, vegetables, whole grains, lean proteins, and low-fat dairy products.<br>
+
+  utter_folic_acid_importance:
+    - text: |
+          <strong>Folic acid is crucial </strong>for preventing neural tube defects in the developing baby.<br>
+
+  utter_iron_rich_foods:
+    - text: |
+          <strong>Lean meats, spinach, and legumes </strong>are excellent sources of iron.<br>
+
+  utter_calcium_intake:
+    - text: |
+          <strong>Consume dairy products, fortified plant milks, and leafy greens </strong>to increase your calcium intake.<br>
+
+  utter_dietary_changes_first_trimester:
+    - text: |
+          <strong>Focus on folic acid </strong>and eat small, frequent meals to manage nausea.<br>
+
+  utter_calorie_needs_second_trimester:
+    - text: |
+          You may need about 300 extra calories per day in the second trimester.<br>
+
+  utter_calcium_iron_third_trimester:
+    - text: |
+          <strong>Calcium </strong>is essential for your baby's bone development, and <strong>iron </strong>supports increased blood volume.<br>
+
+  utter_age_related_dietary_needs:
+    - text: |
+          Younger mothers may need more calcium and iron. Older mothers should monitor weight gain and focus on folic acid and vitamin B12.<br>
+
+  utter_weight_pregnancy_diet:
+    - text: |
+          Underweight women may need to increase calorie intake, while overweight women should focus on nutrient-rich foods and manage weight gain.<br>
+
+  utter_daily_water_intake:
+    - text: |
+          <strong>Aim for about 8-10 cups of water daily, </strong>but this can vary based on your activity level and individual needs.<br>
+
+  utter_sushi_deli_meat_pregnancy:
+    - text: |
+          - <strong>Sushi:</strong> It's best to avoid raw fish due to the risk of foodborne illnesses like listeria and parasites. Cooked sushi is generally safe.<br>
+          - <strong>Deli Meat:</strong> It's recommended to avoid deli meats as they can be contaminated with listeria, which can pose serious risks to both you and your baby.<br>
+
+  utter_calcium_iron_needs:
+    - text: |
+          - Calcium: Pregnant women need about 1,000 milligrams of calcium daily. Women under 19 need 1,300 milligrams.<br>
+          - Iron: Pregnant women need about 27 milligrams of iron daily. This helps support increased blood volume and fetal development.<br> 
+
+
+  utter_period_cramps:
+    - text: |
+         <strong>Period Cramps (Dysmenorrhea)</strong><br>
+           Period cramps are caused by the muscles in the uterus contracting during menstruation. This is usually triggered by  prostaglandins, hormone-like substances that cause inflammation and pain. Higher prostaglandin levels lead to stronger contractions and more severe cramps.<br><br>
+           <img class="fitted" src="https://www.astraveinvascular.com/wp-content/uploads/2024/10/effective-self-care-for-severe-menstrual-cramps.jpg" alt="Exercise Video" width="300" /> <br>
+          <strong>Types of Cramps:</strong><br>
+          - Primary dysmenorrhea: Common type, starting shortly after menstruation begins. Primarily caused by prostaglandins.<br>
+          - Secondary dysmenorrhea: Caused by underlying medical conditions like endometriosis, fibroids, or pelvic inflammatory disease.    <br><br>
+          <strong>Possible Causes of Severe Cramps:</strong><br>
+          - Endometriosis: Tissue similar to the uterine lining grows outside the uterus.<br>
+          - Uterine fibroids: Noncancerous growths in the uterine wall.<br>
+          - Adenomyosis: Tissue that lines the uterus grows into the uterine muscular walls.<br>
+          - Pelvic inflammatory disease (PID): Infection of the female reproductive organs.<br>
+          - Cervical stenosis: Narrowed cervical opening increases uterine pressure.<br>
+          - Intrauterine device (IUD): May cause pain, especially initially.<br>
+          - Ovarian cysts: Can cause severe cramping.<br><br>
+          <strong>When to See a Doctor:</strong><br>
+          Consult a doctor if you experience:
+          - Increased need for painkillers<br>
+          - Pain before your period begins<br>
+          - Persistent pain after bleeding stops<br><br>
+          <strong>Treatment:</strong><br>
+          - Over-the-counter pain relievers: NSAIDs (ibuprofen, naproxen), acetaminophen (Tylenol).<br>
+          - Hormonal birth control: Reduces prostaglandin production.<br>
+          - Prescribed pain relievers: In some cases, stronger medications may be necessary.<br>
+          - Lifestyle changes: Warm compresses, relaxation techniques, exercise.<br><br>
+          <strong>Disclaimer: This information is for general knowledge only. Consult a healthcare professional for any health concerns.</strong>
+
+  utter_menstrual_cycle:
+    - text: |
+          The menstrual cycle is the series of changes a woman's body goes through to prepare for a possible pregnancy. <br>
+          It typically lasts around 28 days, but can vary from person to person. <br>
+          The main phases include:<br>
+          <strong>Menstruation:</strong> The shedding of the uterine lining.
+          <strong>Follicular phase:</strong> The time when an egg matures in the ovary.
+          <strong>Ovulation:</strong> The release of an egg from the ovary.
+          <strong>Luteal phase:</strong> The time after ovulation when the body prepares for a possible pregnancy.
+
+  utter_abdominal_pain:
+    - text: |
+          Abdominal pain can have many causes, ranging from mild indigestion to serious medical conditions. <br>
+          <strong>Some common causes include:</strong>
+          1. Gas
+          2. Constipation
+          3. Food poisoning
+          4. Muscle strains
+          5. Menstrual cramps
+          6. Urinary tract infections (UTIs)
+          7. Appendicitis
+          8. Gallstones <br><br>
+          <strong>When to Seek Medical Attention:</strong><br>
+          - Severe or persistent pain<br>
+          - Fever<br>
+          - Vomiting<br>
+          - Blood in stool or urine<br>
+          - Difficulty breathing<br>
+          - Recent injury<br>
+          <strong>Disclaimer: This information is for general knowledge and does not constitute medical advice. </strong>
+
+
+session_config:
+  session_expiration_time: 60
+  carry_over_slots_to_new_session: true

@@ -1,0 +1,503 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <title>Bump Care</title>
+  <meta content="width=device-width, initial-scale=1.0" name="viewport">
+  <meta content="" name="keywords">
+  <meta content="" name="description">
+
+  <!-- Favicon -->
+  <link href="img/favicon.ico" rel="icon">
+
+  <!-- Google Web Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+  <link
+    href="https://fonts.googleapis.com/css2?family=Heebo:wght@400;500&amp;family=Jost:wght@500;600;700&amp;display=swap"
+    rel="stylesheet">
+
+  <!-- Icon Font Stylesheet -->
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css" rel="stylesheet">
+
+  <!-- Libraries Stylesheet -->
+  <link href="{{ url_for('static', filename='css/animate.min.css')}}" rel="stylesheet">
+  <link href="{{ url_for('static', filename='lib/owlcarousel/assets/owl.carousel.min.css') }} " rel="stylesheet">
+
+  <!-- Customized Bootstrap Stylesheet -->
+  <link href="{{ url_for('static', filename='css/bootstrap.min.css') }}" rel="stylesheet">
+
+  <!-- Template Stylesheet -->
+  <link href="{{ url_for('static', filename='css/style.css') }}" rel="stylesheet">
+  <style>
+    .header-section {
+      position: relative;
+      height: 55vh;
+      overflow: hidden;
+    }
+
+    #bg-video {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transform: translate(-50%, -50%);
+      z-index: 1;
+      opacity: 0.3;
+    }
+
+    .header-section::after {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.5);
+      z-index: 2;
+    }
+
+    .header-content {
+      position: relative;
+      z-index: 3;
+      color: white;
+      text-align: center;
+      padding: 210px 20px;
+    }
+
+    .header-content h1 {
+      font-size: 3em;
+      margin-bottom: 20px;
+      color: #050774;
+    }
+
+    .header-content p {
+      font-size: 1.2em;
+      max-width: 800px;
+      margin: 0 auto;
+    }
+
+    .container {
+    width: 100%;
+    max-width: 1200px;
+    padding: 20px;
+    box-sizing: border-box;
+}
+
+.search-container {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 20px;
+    flex-wrap: wrap;
+}
+
+.search-container select,
+.search-container button {
+    padding: 10px;
+    font-size: 16px;
+    margin: 5px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    outline: none;
+    transition: border-color 0.3s ease-in-out;
+    flex: 1 1 200px;
+}
+
+.search-container select:focus,
+.search-container button:focus {
+    border-color: linear-gradient(to bottom right, #4294e3, #8f12fd);
+}
+
+.search-btn {
+    background: linear-gradient(to bottom right, #4294e3, #8f12fd);
+    color: white;
+    cursor: pointer;
+    transition: background-color 0.3s ease-in-out;
+}
+
+.search-btn:hover {
+    background: linear-gradient(to bottom right, #8f12fd, #4294e3);
+}
+
+.grid-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    gap: 20px;
+    background: rgba(255, 255, 255, 0.5);
+    border-radius: 8px;
+}
+
+.doctor-card {
+    background: linear-gradient(45deg, #ff7e5f, #feb47b);
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+    transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out, opacity 0.3s ease-in-out;
+    opacity: 0.8;
+    animation: fadeIn 0.5s ease-in-out;
+    height: 550px;
+    position: relative;
+}
+
+.doctor-card:hover {
+    transform: scale(1.05);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+    opacity: 1;
+}
+
+.doctor-card.gynecologist {
+    background: linear-gradient(45deg, #ff9a9e, #fecfef);
+}
+
+.doctor-card.perinatologist {
+    background: linear-gradient(45deg, #a1c4fd, #c2e9fb);
+}
+
+.doctor-card.pediatrician {
+    background: linear-gradient(45deg, #fbc2eb, #a6c1ee);
+}
+
+.doctor-card.nutritionist {
+    background: linear-gradient(45deg, #fad0c4, #ffd1ff);
+}
+
+.doctor-info {
+    padding: 15px 5px 0 5px;
+    text-align: center;
+    border-radius: 0 0 8px 8px;
+    height: 150px;
+    display: flex;
+    flex-direction: column;
+    
+}
+
+.doctor-card img {
+    width: 100%;
+    object-fit: cover;
+    padding: 10%;
+    border-radius: 20%;
+    height: 300px;
+}
+
+.doctor-info h2 {
+    margin: 0;
+    font-size: 20px;
+    color: #3a3a3a;
+}
+
+.doctor-info p {
+    margin: 5px 0;
+    font-size: 16px;
+    color: #3a3a3a;
+}
+
+.call-btn {
+    display: inline-block;
+    padding: 8px 15px;
+    background: linear-gradient(to bottom right, #4294e3, #8f12fd);
+    color: white;
+    text-decoration: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s ease-in-out;
+    align-self: center;
+    margin-top: 10px;
+}
+
+.call-btn:hover {
+    background: linear-gradient(to bottom right, #8f12fd, #4294e3);
+}
+
+@media (max-width: 768px) {
+    .grid-container {
+        grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    }
+
+    .doctor-card {
+        height: auto;
+        padding: 10px;
+    }
+
+    .doctor-info {
+        height: auto;
+    }
+}
+
+@media (max-width: 576px) {
+    .grid-container {
+        grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+    }
+
+    .search-container select,
+    .search-container button {
+        flex: 1 1 100%;
+        margin: 5px 0;
+    }
+
+    .doctor-card {
+        height: auto;
+        padding: 10px;
+    }
+
+    .doctor-info {
+        height: auto;
+    }
+}
+
+  </style>
+
+</head>
+
+<body data-bs-spy="scroll" data-bs-target=".navbar" data-bs-offset="51">
+  <div class="container-xxl bg-white p-0">
+    <!-- Spinner Start -->
+    <div id="spinner"
+      class="bg-white position-fixed translate-middle w-100 vh-100 top-50 start-50 d-flex align-items-center justify-content-center">
+      <div class="spinner-grow text-primary" style="width: 3rem; height: 3rem;" role="status">
+        <span class="sr-only">Loading...</span>
+      </div>
+    </div>
+    <!-- Spinner End -->
+
+
+    <!-- Navbar & Hero Start -->
+    <div class="container-xxl position-relative p-0" id="home">
+      <nav class="navbar navbar-expand-lg navbar-light px-4 px-lg-5 py-3 py-lg-0 sticky-top shadow-sm">
+        <a href="" class="navbar-brand p-0">
+          <h1 class="m-0">Bump Care</h1>
+          <!-- <img src="img/logo.png" alt="Logo"> -->
+        </a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse">
+          <span class="fa fa-bars"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarCollapse">
+          <div class="navbar-nav mx-auto py-0">
+            <a href="/" class="nav-item nav-link">Home</a>
+            <a href="/start" class="nav-item nav-link">Getting Pregnant</a>
+            <a href="/week" class="nav-item nav-link">Pregnancy Journey</a>
+            <a href="/tool" class="nav-item nav-link">Usefull Tools</a>
+            <a href="/doctor" class="nav-item nav-link">Find Doctors</a>
+            <a href="/chtbt" class="nav-item nav-link">Our Ai Chatbot</a>
+          </div>
+        </div>
+      </nav>
+    </div>
+    <!-- Navbar & Hero End -->
+    <div class="header-section">
+      <video autoplay muted loop id="bg-video">
+        <source src="{{ url_for('static', filename='img/docvid.mp4') }}" type="video/mp4">
+        Your browser does not support HTML5 video.
+      </video>
+      <div class="header-content">
+        <h1>Best Doctors for Pregnancy</h1>
+        <p>Welcome to our comprehensive guide to finding the best doctors for pregnancy care in Bangladesh. Use the
+          search below to filter by division and doctor type to find the perfect healthcare provider for your needs.</p>
+      </div>
+    </div>
+
+
+
+    <div>
+      <div class="container">
+        <div class="search-container">
+          <select id="division">
+            <option value="">Select Division</option>
+            <option value="Dhaka">Dhaka</option>
+            <option value="Chittagong">Chittagong</option>
+            <option value="Comilla">Comilla</option>
+            <option value="Rajshahi">Rajshahi</option>
+            <option value="Rangpur">Rangpur</option>
+            <option value="Khulna">Khulna</option>
+            <option value="Barishal">Barishal</option>
+            <option value="Sylhet">Sylhet</option>
+          </select>
+          <select id="doctorType">
+            <option value="">Select Doctor Type</option>
+            <option value="Gynecologist">Gynecologist</option>
+            <option value="Perinatologist">Perinatologist</option>
+            <option value="Pediatrician">Pediatrician</option>
+            <option value="Nutritionist ">Nutritionist </option>
+
+          </select>
+          <button class="search-btn" onclick="filterDoctors()">Search</button>
+        </div>
+        <div id="doctorsGrid" class="grid-container"></div>
+      </div>
+    </div>
+
+
+
+
+
+
+    <!-- Footer Start -->
+    <div class="container-fluid bg-primary text-light footer wow fadeIn" data-wow-delay="0.1s"
+      style="visibility: visible; animation-delay: 0.1s; animation-name: fadeIn;">
+      <div class="container py-5 px-lg-5">
+        <div class="row g-5">
+          <div class="col-md-6 col-lg-3">
+            <h4 class="text-white mb-4">Give Your Feedback</h4>
+                        <p><i class="fa fa-map-marker-alt me-3"></i>Dhaka, Bangladesh</p>
+                        <p><i class="fa fa-phone-alt me-3"></i>+012 345 67890</p>
+                        <p><i class="fa fa-envelope me-3"></i>ilora.lamisa@gmail.com</p>
+            <div class="d-flex pt-2">
+              <a class="btn btn-outline-light btn-social" href=""><i class="fab fa-facebook-f"></i></a>
+              <a class="btn btn-outline-light btn-social" href=""><i class="fab fa-github-square"></i></a>
+              <a class="btn btn-outline-light btn-social" href=""><i class="fab fa-linkedin-in"></i></a>
+            </div>
+          </div>
+
+
+        </div>
+      </div>
+      <div class="container px-lg-5">
+        <div class="copyright">
+          <div class="row">
+
+
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- Footer End -->
+
+
+    <!-- chatbot -->
+    <div class="chatBot">
+      <div class="chatBotHeading">
+        <label for="chatTextBox" id="chatOpenTrigger" class=""><img
+            src="{{ url_for('static', filename='img/chaticon.png') }}" alt="Send"></label>
+      </div>
+      <hr class="">
+      <div class="chatBody">
+        <div class="chatSession">
+        </div>
+      </div>
+      <form class="chatForm" autocomplete="off">
+        <div class="typingArea">
+          <textarea name="chatInput" id="chatTextBox" class="textArea"
+            onblur="if(!validateMessage()) this.value = 'Type here...'"
+            onfocus="if(!validateMessage()) this.value = ''"></textarea>
+          <button type="submit" class="sendButton" id="sendButton"><img
+              src="{{ url_for('static', filename='img/send.svg') }}" alt="Send" srcset=""></button>
+        </div>
+        <button type="button" id="chatCloseTrigger">Close Chat!</button>
+      </form>
+    </div>
+    <script src="{{ url_for('static', filename='js/chatBotConversation.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/chatBotValidate.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/chatBotAnimate.js') }}"></script>
+
+  </div>
+
+  <!-- JavaScript Libraries -->
+  <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="{{ url_for('static', filename='lib/wow/wow.min.js') }}"></script>
+  <script src="{{ url_for('static', filename='lib/easing/easing.min.js') }}"></script>
+  <script src="{{ url_for('static', filename='lib/waypoints/waypoints.min.js') }}"></script>
+  <script src="{{ url_for('static', filename='lib/counterup/counterup.min.js') }}"></script>
+  <script src="{{ url_for('static', filename='lib/owlcarousel/owl.carousel.min.js') }}"></script>
+
+  <!-- Template Javascript -->
+  <script src="{{ url_for('static', filename='js/main.js') }} "></script>
+  <script>
+    const doctors = [
+      { name: 'Prof. Dr. Sharmin Akter Liza', type: 'Gynecologist', academic: 'MBBS, FCPS(OBGYN),DCH, MCPS', address: 'Institute of Child and Mother Health (ICMH), Dhaka', phone: '+8801715295950', division: 'Dhaka', photo: "{{ url_for('static', filename='img/doc_1.jpg') }}" },
+      { name: 'Prof. Dr. Rowshan Ara', type: 'Gynecologist', academic: 'MBBS, FCPS(Gynae & Obs), FCPS(REI)', address: 'Ibn Sina Medical Imaging Centre , Dhanmondi R/A,  Dhaka-1209', phone: '+8809610010615', division: 'Dhaka', photo: "{{ url_for('static', filename='img/doctor3.jpg') }}" },
+      { name: 'Dr. Raihana Shawgat', type: 'Gynecologist', academic: 'MBBS (Dhaka), FCPS(Gynae & Obs), FCPS(REI)', address: 'Ibn Sina Consultation Center, Uttor Jatrabari, Dhaka', phone: '+8809610010615', division: 'Dhaka', photo: "{{ url_for('static', filename='img/doctor4.jpg') }}" },
+      { name: 'Dr. Asma Khatun Aurora', type: 'Perinatologist', academic: 'MBBS, FCPS (Obs & Gynae), MRCOG (FP, London, UK)', address: 'Medinova Medical Services, Malibagh, Dhaka', phone: '+8801837930332', division: 'Dhaka', photo: "{{ url_for('static', filename='img/doctor2.jpg') }}" },
+      { name: 'Dr. Runa Akter Dola', type: 'Perinatologist', academic: 'MBBS, BCS(Health), FCPS(OBGYN), FCPS(Feto-Maternal Medicine)', address: 'Padma General Hospital Ltd, Kathalbagan, Dhaka - 1205', phone: '+8801790118855', division: 'Dhaka', photo: "{{ url_for('static', filename='img/doctor5.jpg') }}" },
+      { name: 'Prof. Dr. Azmeri Sultana', type: 'Pediatrician', academic: 'MBBS, DCH, MCPS, FCPS(CHILD), Critical Care Nephrology(USA)', address: 'Labaid Diagnostic, Malibagh, Dhaka', phone: ' +8801766662555', division: 'Dhaka', photo: "{{ url_for('static', filename='img/pedi1.jpg') }}" },
+      { name: 'Sanjib Ahmad Talukder ', type: 'Nutritionist ', academic: 'B.Sc(Honours), M.Sc(Nutrition and Food Science), CND(BIRDEM)', address: 'Hi-Care General Hospital Ltd, Uttara', phone: '01568-404870', division: 'Dhaka', photo: "{{ url_for('static', filename='img/nut1.jpg') }}" },
+      { name: 'Prof. Dr. Farida Yasmin ', type: 'Gynecologist', academic: 'MBBS, DGO, MS(Gyne), MSc in Sexual & Reproductive Medicine(UK)', address: 'Dr. Shumi & Genesis, Probortak Circle, Chittagong', phone: '+8801782666066', division: 'Chittagong', photo: "{{ url_for('static', filename='img/doctor6.jpg') }}" },
+      { name: 'Dr. Syeda Yeasmin Akter', type: 'Gynecologist', academic: 'MBBS, BCS(Health), FCPS(Gynecology & Obstetrics)', address: 'Asperia Health Care Ltd, Probartak Circle, Chattogram', phone: ' +8801810-004550', division: 'Chittagong', photo: "{{ url_for('static', filename='img/doctor7.jpg') }}" },
+      { name: 'Dr. Nazmun Nahar Rosy', type: 'Perinatologist', academic: 'MBBS, FCPS(Obs & Gyne),DCH, MCPS', address: 'Shajinaz Hospital Ltd., Bayezid Bostami, Chattogram', phone: '+8801886-338811', division: 'Chittagong', photo: "{{ url_for('static', filename='img/doc7.jpg') }}" },
+      { name: 'Prof. Dr. Basana Muhuri', type: 'Pediatrician', academic: 'MBBS, FCPS(Pediatrics),DCH, MCPS, FCPS(OBGYN)', address: 'Royal Hospital, Panchlaish, Chattogram', phone: '+880241355934', division: 'Chittagong', photo: "{{ url_for('static', filename='img/pedi2.jpg') }}" },
+      { name: 'Mahfuza Afroz Shathi', type: 'Nutritionist ', academic: 'BSc & MS(Food & Nutrition), PhD-Fellow (Nutritional Biochemistry)', address: 'Apollo Imperial Hospital, Chittagong', phone: '+8809612247247', division: 'Chittagong', photo: "{{ url_for('static', filename='img/nut2.jpg') }}" },
+      { name: 'Dr. Kamrun Nahar', type: 'Gynecologist', academic: 'MBBS, MCPS, DGO(OBGYN),DCH, MCPS', address: 'Cumilla Medical Center Pvt. Ltd. (Tower Hospital)', phone: '+8801711144786', division: 'Comilla', photo: "{{ url_for('static', filename='img/doctor9.jpg') }}" },
+      { name: 'Dr. Umme Habiba', type: 'Perinatologist', academic: 'MBBS(DMC),BCS (Health),FCPS(Gynae & Obs)', address: 'Comilla Navana Hospital (Pvt) Ltd.', phone: '+8801817092647', division: 'Comilla', photo: "{{ url_for('static', filename='img/doctor10.jpg') }}" },
+      { name: 'Prof. Dr. K. A. Mannan', type: 'Pediatrician', academic: 'MBBS, FCPS(Pediatrics),DCH, MCPS', address: 'Mainamoti Medical College & Hospital', phone: '+8801711850588', division: 'Comilla', photo: "{{ url_for('static', filename='img/pedi3.jpg') }}" },
+      { name: 'Mahfuza Afroz Shathi', type: 'Nutritionist ', academic: 'BSc & MS(Food & Nutrition),DCH, MCPS', address: 'Apollo Imperial Hospital, Comilla', phone: '+8809612247247', division: 'Comilla', photo: "{{ url_for('static', filename='img/nut3.jpg') }}" },
+      { name: 'Dr. Afroza Begum Shila', type: 'Gynecologist', academic: 'MBBS, FCPS(OBGYN),FCPS(Pediatrics)', address: ' Lab De Novo, Scout Bhabon, Stadium Market, Sylhet', phone: '+8801711359680', division: 'Sylhet', photo: "{{ url_for('static', filename='img/doctor12.jpg') }}" },
+      { name: 'Dr. Kaji Md. Nasimuzzaman', type: 'Perinatologist', academic: 'MBBS, MCPS, DGO, FMAS, DMAS(INDIA)', address: 'Sylhet MAG Osmani Medical College & Hospital', phone: '+8801308533863', division: 'Sylhet', photo: "{{ url_for('static', filename='img/doctor11.jpg') }}" },
+      { name: 'Prof. Dr. Md. Manajjir Ali', type: 'Pediatrician', academic: 'MBBS, FCPS(CHILD), DMEd(UK), FRCP(EDIN, UK)', address: 'Popular Medical Center, Sylhet', phone: ' +8801715084078', division: 'Sylhet', photo: "{{ url_for('static', filename='img/pedi4.jpg') }}" },
+      { name: 'Dr. Noor-E-Atia Lovely', type: 'Gynecologist', academic: 'MBBS, BCS(Health), FCPS(OBGYN)', address: 'Islami Bank Hospital, Rajshahi', phone: '+8801777242536', division: 'Rajshahi', photo: "{{ url_for('static', filename='img/doctor13.jpg') }}" },
+      { name: 'Prof. Dr. Shahela Jesmin Shilpi', type: 'Perinatologist', academic: 'MBBS, FCPS(OBGYN)', address: 'Rajshahi Medical College Hospital, Rajshahi', phone: '+8809613787811', division: 'Rajshahi', photo: "{{ url_for('static', filename='img/doctor14.jpg') }}" },
+      { name: 'Dr. Rowshan', type: 'Nutritionist ', academic: 'MBBS, DGO, MCPS, FCPS(OBGYN)', address: 'Rajshahi Medical College Hospital, Rajshahi', phone: '+880999999999', division: 'Rajshahi', photo: "{{ url_for('static', filename='img/doctor8.jpg') }}" },
+      { name: 'Dr. Momena Akter', type: 'Gynecologist', academic: 'MBBS, FCPS(Gynecology and Obstetrics)', address: 'Rangpur Medical College Hospital, Rangpur', phone: '+880 1712-922922', division: 'Rangpur', photo: "{{ url_for('static', filename='img/doctor.jpg') }}" },
+      { name: 'Pediatrician E', type: 'Pediatrician', academic: 'MBBS, FCPS(OBGYN)', address: 'Rajshahi Medical College Hospital, Rajshahi', phone: '+880777777777', division: 'Rajshahi', photo: "{{ url_for('static', filename='img/doctor.jpg') }}" },
+      { name: 'Dr. Tania Ahmed', type: 'Perinatologist', academic: 'MBBS, FCPS(OBGYN)', address: 'Rangpur Medical College Hospital, Rangpur', phone: '+8802020202020', division: 'Rangpur', photo: "{{ url_for('static', filename='img/doctor7.jpg') }}" },
+      { name: 'Dr. Zinat Anzum', type: 'Nutritionist ', academic: 'MBBS, FCPS(OBGYN)', address: 'Rangpur Medical College Hospital, Rangpur', phone: '+8803030303030', division: 'Rangpur', photo: "{{ url_for('static', filename='img/doctor3.jpg') }}" },
+      { name: 'Dr. V', type: 'Gynecologist', academic: 'MBBS, FCPS(OBGYN)', address: 'Khulna Medical College Hospital, Khulna', phone: '+8804040404040', division: 'Khulna', photo: "{{ url_for('static', filename='img/doctor.jpg') }}" },
+      { name: 'Dr. Md. Manajjir Ali', type: 'Perinatologist', academic: 'MBBS, FCPS(OBGYN)', address: 'Islami Bank Hospital,, Khulna', phone: '+8805050505050', division: 'Khulna', photo: "{{ url_for('static', filename='img/doctor.jpg') }}" },
+      { name: 'Dr. X', type: 'Nutritionist ', academic: 'MBBS, FCPS(OBGYN)', address: 'Khulna Medical College Hospital, Khulna', phone: '+8806060606060', division: 'Khulna', photo: "{{ url_for('static', filename='img/doctor.jpg') }}" },
+      { name: 'Dr. Tania Afroz', type: 'Gynecologist', academic: ' MBBS, BCS(Health), and FCPS(OBGYN)', address: 'South Apollo Diagnostic Complex, Sadar Road, Barisal', phone: '+8801711457444', division: 'Barishal', photo: "{{ url_for('static', filename='img/doctor6.jpg') }}" },
+      { name: 'Dr. Zinat Anzum', type: 'Perinatologist', academic: 'MBBS, FCPS(OBGYN)', address: 'Barishal Medical College Hospital, Barishal', phone: '+8808080808080', division: 'Barishal', photo: "{{ url_for('static', filename='img/doctor13.jpg') }}" },
+      { name: 'Dr. Ayesha Siddika', type: 'Nutritionist ', academic: 'MBBS, FCPS(OBGYN)', address: 'Barishal Medical College Hospital, Barishal', phone: '+8809090909090', division: 'Barishal', photo: "{{ url_for('static', filename='img/doctor.jpg') }}" },
+      { name: 'Pediatrician F', type: 'Pediatrician', academic: 'MBBS, FCPS(OBGYN)', address: 'Rangpur Medical College Hospital, Rangpur', phone: '+880888888888', division: 'Rangpur', photo: "{{ url_for('static', filename='img/doctor14.jpg') }}" },
+      { name: 'Pediatrician G', type: 'Pediatrician', academic: 'MBBS, FCPS(OBGYN)', address: 'Khulna Medical College Hospital, Khulna', phone: '+880999999999', division: 'Khulna', photo: "{{ url_for('static', filename='img/doctor11.jpg') }}" },
+    ];
+
+
+
+
+    function displayDoctors(doctors) {
+      const doctorsGrid = document.getElementById('doctorsGrid');
+      doctorsGrid.innerHTML = '';
+      doctors.forEach(doctor => {
+        const card = document.createElement('div');
+        card.className = `doctor-card ${doctor.type.toLowerCase()}`;
+        card.innerHTML = `
+            <img src="${doctor.photo}" alt="${doctor.name}">
+            <div class="doctor-info">
+                <h2>${doctor.name}</h2>
+                <p>${doctor.academic}</p>
+                <p><b>Address:</b> ${doctor.address}</p>
+                
+           
+          
+            <p style=" color: #1d1d1d;""><b>Phone:</b> <span>+8801715295950</span></p>
+            <button class="call-btn" onclick="copyToClipboard('${doctor.phone}')">Call</button></div>
+        `;
+        doctorsGrid.appendChild(card);
+      });
+    }
+
+    function filterDoctors() {
+      const division = document.getElementById('division').value;
+      const doctorType = document.getElementById('doctorType').value;
+      const filteredDoctors = doctors.filter(doctor => {
+        return (division === '' || doctor.division === division) &&
+          (doctorType === '' || doctor.type === doctorType);
+      });
+      displayDoctors(filteredDoctors);
+    }
+
+    function copyToClipboard(text) {
+      const tempInput = document.createElement('input');
+      tempInput.style.position = 'absolute';
+      tempInput.style.left = '-9999px';
+      tempInput.value = text;
+      document.body.appendChild(tempInput);
+      tempInput.select();
+      document.execCommand('copy');
+      document.body.removeChild(tempInput);
+      alert(`Copied: ${text}`);
+    }
+
+    // Display initial 12 doctors
+    displayDoctors(doctors.slice(0, 12));
+
+
+
+  </script>
+
+
+</body>
+
+</html>

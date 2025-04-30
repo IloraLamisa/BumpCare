@@ -1,0 +1,731 @@
+version: "3.1"
+nlu:
+  - intent: greet
+    examples: |
+      - hi
+      - hello
+      - hey
+      - hey
+      - hello
+      - hi
+      - hello there
+      - good morning
+      - good evening
+      - moin
+      - hey there
+      - let's go
+      - hey dude
+      - goodmorning
+      - goodevening
+      - good afternoon
+      - hey hi
+
+  - intent: goodbye
+    examples: |
+      - goodbye
+      - bye
+      - see you later
+      - good by
+      - cee you later
+      - good night
+      - bye tabib
+      - goodbye
+      - have a nice day
+      - see you around
+      - bye bye
+      - see you later
+
+  - intent: affirm
+    examples: |
+      - yes
+      - of course
+      - sure
+      - Yes
+      - yea
+      - yep
+      - yeah
+      - indeed
+      - of course
+      - that sounds good
+      - correct
+      - absolutely
+      - sure
+      - definitely
+      - right
+      - ok
+      - okay
+      - cool
+      - sounds good
+      - that's right
+      - that's correct
+
+  - intent: deny
+    examples: |
+      - no
+      - not really
+      - I don't think so
+      - No
+      - never
+      - I don't think so
+      - don't like that
+      - no way
+      - not really
+      - nope
+      - nah
+      - nay
+      - not really
+      - not sure
+      - not really sure
+      - don't like that
+
+  - intent: mood_great
+    examples: |
+      - I'm feeling great
+      - I'm doing well
+      - I'm awesome
+      - perfect
+      - great
+      - amazing
+      - feeling like a king
+      - wonderful
+      - I am feeling very good
+      - I am great
+      - I am amazing
+      - I am going to save the world
+      - super stoked
+      - extremely good
+      - so so perfect
+      - so good
+      - so perfect
+      - i feel fine
+      - i am feeling fine
+      - i feel great
+      - i feel awesome
+
+  - intent: not_well
+    examples: |
+      - I'm not feeling well
+      - I feel sick
+      - I'm unwell
+      - my day was horrible
+      - I am sad
+      - I don't feel very well
+      - I am disappointed
+      - super sad
+      - I'm so sad
+      - sad
+      - very sad
+      - unhappy
+      - not good
+      - not very good
+      - extremely sad
+      - so saad
+      - so sad
+      - I am not feeling well
+      - i feel sick
+      - i am sick
+      - i am not well
+
+  - intent: bot_challenge
+    examples: |
+      - are you a bot?
+      - are you real?
+      - are you a bot?
+      - are you a human?
+      - am I talking to a bot?
+      - am I talking to a human?
+      - who are you
+
+  - intent: out_of_scope
+    examples: |
+      - what is the meaning of life?
+      - tell me a joke
+      - what are you?
+      - what are you doing?
+      - what are you up to?
+      - what are you thinking?
+      - what are you made of?
+      - what are you made up of?
+      - what are you made from?
+      - what are you made out of the way?
+      - i am god
+      - sjdjajsdl
+      - asjdaljhsdj
+      - asdfja;lsdf
+      - i am batman
+      - i am iron man
+      - i love you
+      - i am a god
+      - i dont like you
+      - you are idiot
+      - you are stupid
+      - you are dumb
+      - you are a fool
+      - you are a moron
+
+  - intent: say_thanks
+    examples: |
+      - thank you
+      - thanks a lot
+      - appreciate it
+      - thanks
+      - thank you
+      - thank you very much
+      - thanks a lot
+      - thank you so much
+      - thanks a bunch
+      - thanks a ton
+      - thanks a million
+      - thank you loads
+      - thank you heaps
+      - thank you man
+      
+  - intent: want_to_ask_question
+    examples: |
+      - I want to ask a question
+      - I have a question
+      - may I ask something?
+      - i want to ask a question
+      - i want your help
+      - i want to know information on drugs
+      - help me bro
+      - help me please
+      - tell me something
+      - yes i have a question
+      - i want some drug information
+
+
+  - intent: hospitals_near
+    examples: |
+      - find hospitals near me
+      - where is the nearest hospital?
+      - tell me about nearby hospitals
+      - hospital location near me
+      - hospital near me
+      - hospitals near me
+      - hospitals near
+      - hospitals
+      - hospitals near my location
+      - hospitals near my place
+      - hospitals near my home
+      - hospitals near my house
+      - hospitals near my area
+      - hospitals near my city
+      - hospitals near my town
+      - hospitals near my village
+      - hospitals near my district
+      - hospitals near my state
+      - hospitals near my country
+
+  - intent: health_tips
+    examples: |
+      - give me health tips
+      - tell me how to stay healthy
+      - share some health advice
+      - give me some health tips
+      - i want some health tips
+      - i need some health tips
+      - i want to know some health tips
+      - health tips
+      - suggest me health tips
+      - suggest me health
+      - suggest me some health tips
+      - tips health
+      - diet health tips
+      - diet tips
+
+  - intent: how_are_you_doing
+    examples: |
+      - how are you?
+      - how are you doing today?
+      - how's it going?
+
+  - intent: ask_exercise_tips
+    examples: |
+      - give me exercise tips
+      - exercise advice
+      - give me some exercise tips
+      - what are good exercises?
+      - What exercise should I do?
+      - Please suggest exercises for me.
+      - Suggest some exercises.
+      - Can you recommend exercises?
+      - What kind of exercises are good for me?
+      - Can you give me exercise tips?
+      - I need exercise suggestions.
+      - Recommend some exercises for me.
+      - Tell me some exercises.
+      - What exercises should I follow?
+      - Help me with exercise suggestions.
+      - Can you guide me with exercises?
+      - Tell me the best exercises for fitness.
+      - What exercises are suitable for me?
+      - What exercises can you recommend?
+      - Suggest some daily exercises.
+      - Please tell me how to exercise.
+
+  # Meal Plan --------------------- 
+  - intent: ask_meal_plan
+    examples: |
+      - I need a meal plan.
+      - suggest meal plan.
+      - meal plan.
+      - Could you suggest me a meal plan?
+      - Can you provide a healthy meal plan for pregnancy?
+      - What should I eat during pregnancy?
+      - Suggest some nutrition tips for pregnancy.
+      - I need advice on pregnancy nutrition.
+      - Can you recommend a diet for pregnant women?
+      - Help me with a pregnancy diet plan.
+      - What kind of food should I eat while pregnant?
+      - Do you have any pregnancy meal suggestions?
+      - Give me a weekly diet plan for pregnancy.
+      - Recommend healthy foods for pregnancy.
+      - I want to know about a balanced diet for pregnancy.
+      - What are the best foods for pregnancy nutrition?
+      - Can you guide me on what to eat during pregnancy?
+      - Provide some diet tips for pregnant women.
+      - Tell me about good nutrition for pregnancy.
+      - Share some pregnancy diet ideas.
+      - Help me with a meal plan suitable for pregnancy.
+
+  - intent: inform_trimester
+    examples: |
+      - I am in my [first](trimester) trimester
+      - I am in the [second](trimester) trimester
+      - I am in my [third](trimester) trimester
+      - [first](trimester)
+      - [second](trimester)
+      - [third](trimester)
+      - I am in the [1st](trimester) trimester
+      - I am in the [2nd](trimester) trimester
+      - I am in the [3rd](trimester) trimester
+
+
+  - intent: ask_breakfast
+    examples: |
+      - What should I have for breakfast today?
+      - Can you suggest a breakfast for me?
+      - What are good breakfast options for a pregnant mother?
+      - Breakfast ideas, please?
+      - breakfast suggestions
+
+  - intent: ask_lunch 
+    examples: | 
+      - What should I have for lunch?
+      - Suggest me lunch
+      - Lunch options please?
+      - What is a good lunch during pregnancy?
+      - Any lunch recommendations?
+      - Recommend a healthy lunch
+      - What is the best lunch option for me?
+      - Tell me what to eat for lunch
+      - Could you help me plan my lunch?
+      - lunch suggestions
+
+  - intent: ask_dinner 
+    examples: | 
+      - What should I have for dinner?
+      - Suggest me dinner
+      - Dinner options please?
+      - What is a good dinner during pregnancy?
+      - Any dinner recommendations?
+      - Recommend a healthy dinner
+      - What is the best dinner option for me?
+      - Tell me what to eat for dinner
+      - Can you give me a dinner suggestion?
+      - dinner suggest
+
+  - intent: ask_baby_development
+    examples: |
+      - Can you tell me about the baby's growth?
+      - What is the size of the baby?
+      - Tell me about the baby development milestones.
+      - How is the baby growin?
+      - Describe the baby's size?
+      - What changes happern in the mother's body?
+      - Can you give baby development update?
+      - What are the pregnancy milestones?
+      - How big is the baby in week?
+      - baby development progress
+      - process of baby development
+      - How is my baby developing?
+      - Baby development stages.
+      - How is the baby developing?
+      
+  - intent: provide_exercise_age
+    examples: |
+      - 18-30
+      - 31-39
+      - 40+
+      - 40 plus
+
+  - intent: provide_baby_development_weeks
+    examples: |
+      - 1-13
+      - 14-26
+      - 27-40
+      - 27+
+      - 27 plus
+
+  - intent: ask_gynaecologist_doctor
+    examples: |
+      - Gynaecologist
+      - gynaecologist
+      - doctor suggestions 
+      - doctors
+      - suggest me doctor
+      - emergency doctor
+      - find gynaecologist
+      - show gynaecologist
+      - show me some doctors
+      - gynaecologist near me
+      - doctors for women
+      - gynaecologist contact
+      - where to find gynaecologist 
+      - need doctor
+      - need a doctor
+      - need a specialist
+      - need a specialist doctor
+      - need a doctor for me
+      - need a specialist for me
+      - suggestion for doctor
+      - doctor suggestion
+      - appointment
+      - suggest doctor
+      - suggest me doctor
+      - suggest me a doctor
+      - suggest me a specialist
+      - suggest me a specialist doctor
+      - suggest doctor for me
+
+
+  # - intent: ask_doctors_name
+  #   examples: |
+  #     - Jesmin Jerin
+  #     - Sahara Arabi
+  #     - Sharmin Akter Liza
+  #     - Jobaida Sultana Susan
+  #     - dr. jesmin
+  #     - dr. sharmin
+  #     - dr. suzan
+  #     - dr. arabi
+  #     - dr sahara
+
+  # - intent: ask_username
+  #   examples: |
+  #     - My name is [Anika](user_name)
+  #     - I am [John](user_name)
+  #     - Call me [Ali](user_name)
+
+  # - intent: provide_appointment_details
+  #   examples: |
+  #     - doctor name [Dr. Jesmin](doctor_name), date [01-01-24](appointment_date) for [abdominal pain](reason).
+  #     - Dr. [Ahmed](doctor_name), on [15-01-24](appointment_date), for [general checkup](reason).
+  #     - [Dr. Smith](doctor_name), [20-01-24](appointment_date), [consultation](reason).
+
+  # - intent: show_appointment
+  #   examples: |
+  #     - Show my appointment
+  #     - Retrieve my appointments
+  #     - Do I have any appointments?
+
+
+  - intent: askfor_booking_appointment 
+    examples: |
+      - ask for a booking appointment
+      - I want to book an Appointment
+      - book Appointment
+      - Booking an Appointment
+      - appointment with doctor
+      - doctor appointment booking
+      - appointment with doctor
+      - i want to book appointment
+      - i want to book an appointment with a doctor
+
+  - intent: ask_appointment_day
+    examples:
+    - text: today
+    - text: tomorrow
+    - text: satarday
+    - text: sunday
+    - text: monday
+    - text: tuesday
+    - text: wednesday
+    - text: thursday
+    - text: friday
+    - text: next satarday
+    - text: in monday
+    - text: next wednesday
+    - text: appointment on satarday
+    - text: i want appointment on sunday
+    - text: book appointment for tomorrow
+    - text: book appointment for today
+    - text: appointment for today 
+
+  - intent: confirm_appointment
+    examples: |
+      - Confirm
+      - confirm
+      - confirmed
+      - confirm appointment
+
+  - intent: cancel_appointment
+    examples: |
+      - Cancel
+      - cancel
+      - canceled
+
+# Questions About Pregnancy TimeLine
+# Early Pregnancy (First Trimester: Weeks 1-12)
+
+# Random QNA ----------- 
+
+  - intent: pregnancy_tests
+    examples: |
+      - What tests will I need during pregnancy?
+      - Are there any routine tests for pregnant women?
+      - What are the common pregnancy tests?
+
+  - intent: safe_painkillers_pregnancy
+    examples: |
+      - Is it safe to take painkillers during pregnancy?
+      - Can I take pain relievers while pregnant?
+      - What pain medicines are safe to use during pregnancy?
+      - is pain killer safe to use during Salvador?
+      - is pain killer safe?
+
+  - intent: allergy_medication_pregnancy
+    examples: |
+      - Can I take allergy medications while pregnant?
+      - Are allergy medications safe during pregnancy?
+      - What allergy medications are safe to use during pregnancy?
+      - What allergy medicines are safe to use while pregnant?
+
+  - intent: pregnancy_avoidance
+    examples: |
+      - what shouldn't I do during pregnancy?
+      - what should I avoid during pregnancy?
+      - what should I not do during pregnancy?
+      - what are the things to avoid during pregnancy?
+
+  - intent: pregnancy_food_avoidance
+    examples: |
+      - what shouldn't I eat during pregnancy?
+      - what foods to avoid during pregnancy?
+      - what foods are not safe to eat during pregnancy?
+      - what foods should I avoid during pregnancy?
+      - is it safe to eat [food_name] during pregnancy? 
+
+  - intent: pregnancy_yoga
+    examples: |
+      - what kind of yoga is safe during pregnancy?
+      - can I do yoga while pregnant?
+      - what yoga poses are safe during pregnancy?
+      - what yoga is safe during pregnancy?
+      - what yoga poses are safe for pregnant women?
+
+
+# mental well being -----------
+  - intent: emotional_wellbeing_tips
+    examples: |
+      - how to improve emotional well-being
+      - tips for emotional well-being
+      - what are some ways to improve my mental health
+      - how can I boost my mood
+      - what can I do to feel better emotionally
+
+  - intent: stress_management_techniques
+    examples: |
+      - how to reduce stress
+      - stress management techniques
+      - what are some effective stress relievers
+      - how to cope with stress
+      - ways to de-stress
+
+  - intent: importance_of_sleep
+    examples: |
+      - why is sleep important for mental health
+      - how much sleep do I need
+      - the importance of sleep for emotional well-being
+      - does sleep affect my mood
+
+  - intent: healthy_lifestyle_habits
+    examples: |
+      - how does exercise affect mental health
+      - how to improve mental health through diet
+      - the benefits of mindfulness for mental well-being
+      - how to practice self-care
+
+  - intent: seeking_professional_help
+    examples: |
+      - when should I seek professional help for mental health
+      - signs I need to see a therapist
+      - how to find a therapist
+
+  - intent: common_mental_health_issues
+    examples: |
+      - what are some common mental health issues
+      - what is anxiety
+      - what is depression
+      - what is bipolar disorder
+      - how can i overcome anxiety
+      - how can i overcome depression
+
+
+  - intent: prenatal_vitamins_importance
+    examples: |
+      - Why are prenatal vitamins important?
+      - What are the benefits of taking prenatal vitamins?
+      - Are prenatal vitamins necessary for all pregnant women?
+      - How do prenatal vitamins help my baby's development?
+      - What are the risks of not taking prenatal vitamins?
+
+  - intent: prenatal_vitamins
+    examples: |
+      - What prenatal vitamins should I take?
+      - What vitamins are essential during pregnancy?
+      - Where can I find good quality prenatal vitamins?
+      - Should I take a specific brand of prenatal vitamins?
+      - Are there any side effects of taking prenatal vitamins?
+
+  - intent: pregnancy_diet_avoidance
+    examples: |
+      - What foods should I avoid during pregnancy?
+      - Are there any foods I should not eat while pregnant?
+      - What foods are unsafe to eat when pregnant?
+      - Can I eat deli meat while pregnant?
+      - Are there any fruits or vegetables to avoid during pregnancy?
+      - Is it safe to eat sushi while pregnant?
+      - Can I eat raw fish during pregnancy?
+      - What about soft cheeses, are they okay to eat?
+      - Should I avoid certain types of fish?
+
+  - intent: pregnancy_diet_focus
+    examples: |
+      - What foods should I focus on during pregnancy?
+      - What is a healthy pregnancy diet?
+      - What are some good sources of protein during pregnancy?
+      - How can I ensure I'm getting enough nutrients?
+      - What are some healthy snack options during pregnancy?
+
+  - intent: folic_acid_importance
+    examples: |
+      - Why is folic acid important during pregnancy?
+      - What are the benefits of folic acid?
+      - When should I start taking folic acid?
+      - How much folic acid should I take?
+      - What happens if I don't get enough folic acid?
+
+  - intent: iron_rich_foods
+    examples: |
+      - What foods are rich in iron?
+      - How can I increase my iron intake?
+      - What are some good sources of iron for vegetarians?
+      - Are there any foods that can help me absorb iron better?
+
+  - intent: calcium_intake
+    examples: |
+      - How can I increase my calcium intake during pregnancy?
+      - What are good sources of calcium for pregnant women?
+      - Are dairy products the only source of calcium?
+      - What if I'm lactose intolerant?
+
+  - intent: dietary_changes_first_trimester
+    examples: |
+      - How should my diet change in the first trimester?
+      - What are some dietary tips for the first trimester?
+      - How to deal with morning sickness through diet?
+      - What are some good foods to eat when feeling nauseous?
+
+  - intent: calorie_needs_second_trimester
+    examples: |
+      - How many extra calories do I need in the second trimester?
+      - What are my calorie needs in the second trimester?
+      - How much weight gain is recommended in the second trimester?
+
+  - intent: calcium_iron_third_trimester
+    examples: |
+      - Why do I need more calcium and iron in the third trimester?
+      - What is the importance of calcium and iron in the third trimester?
+      - How can I ensure I'm getting enough calcium and iron in the third trimester?
+
+  - intent: age_related_dietary_needs
+    examples: |
+      - Should my diet differ based on my age during pregnancy?
+      - What are the dietary needs for younger pregnant women?
+      - What are the dietary needs for older pregnant women?
+      - How does age affect my nutritional requirements during pregnancy?
+
+  - intent: weight_pregnancy_diet
+    examples: |
+      - How does my weight affect my pregnancy diet?
+      - What are the dietary recommendations for underweight pregnant women?
+      - What are the dietary recommendations for overweight pregnant women?
+      - How can I manage weight gain during pregnancy?
+
+  - intent: daily_water_intake
+    examples: |
+      - How much water should I drink daily during pregnancy?
+      - how water needs to drink daily during pregnency?
+      - What are the signs of dehydration during pregnancy?
+      - How can I ensure I'm drinking enough fluids?
+      - How much water should I drink during pregnancy?
+      - How much water is recommended for pregnant women?
+      - Is it important to stay hydrated during pregnancy?
+      - How can I tell if I'm drinking enough water?
+      - how much daily water needs to drink?
+
+  - intent: sushi_deli_meat_pregnancy
+    examples: |
+      - Can I eat sushi while pregnant?
+      - Is it safe to eat deli meat during pregnancy?
+      - Are there any risks associated with eating sushi or deli meat during pregnancy?
+      - How can I safely consume deli meat during pregnancy?
+
+  - intent: calcium_iron_needs
+    examples: |
+      - How much calcium do I need during pregnancy?
+      - How much iron do I need during pregnancy?
+      - What are the recommended daily allowances for calcium and iron during pregnancy?
+      - Why are calcium and iron important for the baby's development?
+
+
+  - intent: period_cramps
+    examples: |
+      - What causes period cramps?
+      - How can I relieve period cramps?
+      - What are some home remedies for period cramps?
+      - What are period cramps?
+      - Why do I get period cramps?
+      - How long do period cramps usually last?
+      - What can I do to prevent period cramps?
+      - Are there any exercises that can help with period cramps?
+      - Should I see a doctor about my period cramps?
+
+  - intent: menstrual_cycle
+    examples: |
+      - What is the menstrual cycle?
+      - How long is a normal menstrual cycle?
+      - What are the phases of the menstrual cycle?
+      - What are the symptoms of the menstrual cycle?
+      - Is it normal to have irregular periods?
+      - What can cause irregular periods?
+      - How to track my menstrual cycle?
+      - Menstrual cycle and ovulation?
+      - What is PMS?
+      - What are the symptoms of PMS?
+
+  - intent: abdominal_pain
+    examples: |
+      - What could be causing my abdominal pain?
+      - When should I be concerned about abdominal pain?
+      - What are some common causes of abdominal pain?
+      - How can I relieve abdominal pain at home?
+      - Should I see a doctor for abdominal pain?
+      - What are some questions my doctor might ask?
+      - What are the different types of abdominal pain?
+      - How to describe abdominal pain to a doctor?
+      - Is this type of abdominal pain normal?
+      - What are some things I can do to prevent abdominal pain?
+

@@ -1,0 +1,84 @@
+version: "3.1"
+
+rules:
+
+- rule: ask to help when user says hello
+  steps:
+  - intent: greet
+  - action: utter_greet
+  - action: utter_question
+
+- rule: how are you doing
+  steps:
+  - intent: how_are_you_doing
+  - action: utter_how_are_you_doing
+
+- rule: Say goodbye anytime the user says goodbye
+  steps:
+  - intent: goodbye
+  - action: utter_goodbye
+
+- rule: Say 'I am a bot' anytime the user challenges
+  steps:
+  - intent: bot_challenge
+  - action: utter_iamabot
+
+- rule: thanks to help when user says thanks
+  steps:
+  - intent: say_thanks
+  - action: utter_welcome
+
+- rule: Say goodbye anytime the user says goodbye
+  steps:
+  - intent: goodbye
+  - action: utter_goodbye
+
+- rule: out of scope
+  steps:
+  - intent: out_of_scope
+  - action: utter_please_rephrase
+
+- rule: Ask the user to rephrase whenever they send a message with low NLU confidence
+  steps:
+  - intent: nlu_fallback
+  - action: utter_please_rephrase
+
+- rule: are you a bot
+  steps:
+  - intent: bot_challenge
+  - action: utter_iamabot
+
+- rule: user wants help
+  steps:
+  - action: utter_anything_else
+  - intent: affirm
+  - action: utter_ask_question
+
+- rule: user doesn't want help
+  steps:
+  - action: utter_anything_else
+  - intent: deny
+  - action: utter_goodbye
+
+- rule: user doesn't want help 2
+  steps:
+  - action: utter_anything_else
+  - intent: goodbye
+  - action: utter_goodbye
+
+- rule: Say WELCOME anytime user says thanks
+  steps:
+  - intent: say_thanks
+  - action: utter_welcome
+
+- rule: want to ask question
+  steps:
+  - intent: want_to_ask_question
+  - action: utter_ask_question
+
+- rule: sugggest me health tips
+  steps:
+  - intent: health_tips
+  - action: utter_health_tips
+  - action: utter_anything_else
+

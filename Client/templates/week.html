@@ -1,0 +1,612 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <title>Bump Care</title>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <meta content="" name="keywords">
+    <meta content="" name="description">
+
+    <!-- Favicon -->
+    <link href="img/favicon.ico" rel="icon">
+
+    <!-- Google Web Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Heebo:wght@400;500&amp;family=Jost:wght@500;600;700&amp;display=swap"
+        rel="stylesheet">
+
+    <!-- Icon Font Stylesheet -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css" rel="stylesheet">
+
+    <!-- Libraries Stylesheet -->
+    <link href="{{ url_for('static', filename='css/animate.min.css')}}" rel="stylesheet">
+    <link href="{{ url_for('static', filename='lib/owlcarousel/assets/owl.carousel.min.css') }} " rel="stylesheet">
+
+    <!-- Customized Bootstrap Stylesheet -->
+    <link href="{{ url_for('static', filename='css/bootstrap.min.css') }}" rel="stylesheet">
+
+    <!-- Template Stylesheet -->
+    <link href="{{ url_for('static', filename='css/style.css') }}" rel="stylesheet">
+    <style>
+        .introduction {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            background: linear-gradient(to bottom right, #4294e3, #8f12fd);
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            padding: 5%;
+            margin-bottom: 20px;
+            color: #ffffff;
+        }
+
+        .intro-text {
+            max-width: 60%;
+            flex: 1;
+        }
+
+        .intro-image img {
+            max-width: 100%;
+            border-radius: 10px;
+            margin-top: 10px;
+            margin-left: 25px;
+        }
+
+        .introduction h1 {
+            color: #fff;
+            font-weight: 700 !important;
+            margin-top: 0;
+            margin-bottom: .5rem;
+            font-family: "Jost", sans-serif;
+            font-weight: 500;
+            line-height: 1.2;
+        }
+
+        .introduction p {
+            font-size: 1.2rem;
+            margin-bottom: 1.5rem;
+            color: #ffffff;
+        }
+
+        .extra-info {
+            margin-top: 20px;
+        }
+
+        .extra-info h2 {
+            color: #fff;
+            font-size: 1.5rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .extra-info p {
+            font-size: 1rem;
+            margin-bottom: 1rem;
+            color: #ffffff;
+        }
+
+
+        .grid-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+            padding: 20px;
+            background: rgba(255, 255, 255, 0.5);
+            border-radius: 8px;
+            max-width: 1200px;
+            margin: auto;
+        }
+
+        .clickable-box {
+            display: flex;
+            flex-direction: column;
+            padding: 2px;
+            background: linear-gradient(45deg, #56ccf2, #2f80ed);
+            border-radius: 8px;
+            cursor: pointer;
+            transition: background 0.3s ease, transform 0.3s ease;
+        }
+
+        .clickable-box:hover {
+            background: linear-gradient(45deg, #2f80ed, #56ccf2);
+            transform: scale(1.05);
+        }
+
+        .clickable-box img {
+            max-width: 100%;
+            border-radius: 8px;
+            height: 260px;
+            object-fit: cover;
+        }
+
+        .clickable-box p {
+            color: white;
+            margin-top: 10px;
+            font-size: 30px;
+            text-align: center;
+        }
+
+        .picture-card {
+            padding: 20px;
+            background: linear-gradient(135deg, #2b5876, #4e4376);
+
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+            width: 60%;
+            display: none;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%) scale(0.8);
+            opacity: 0;
+            transition: opacity 1s ease-in-out, transform 1s ease-in-out;
+            z-index: 1000;
+        }
+
+        .picture-card.show {
+            display: flex;
+            opacity: 1;
+            transform: translate(-50%, -50%) scale(1);
+        }
+
+        .picture-card.hide {
+            opacity: 0;
+            transform: translate(-50%, -50%) scale(0.8);
+        }
+
+        .picture-card img {
+            max-width: 50%;
+            border-radius: 8px;
+        }
+
+        .text-content {
+            max-width: 45%;
+            color: rgb(225, 223, 223);
+            padding: 10px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .text-content h2 {
+            margin: 0;
+            font-size: 24px;
+            color: #fff;
+        }
+
+        .text-content p {
+            margin-top: 10px;
+            font-size: 18px;
+        }
+
+        .close-btn {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background: #ff4e50;
+            color: white;
+            border: none;
+            border-radius: 50%;
+            width: 30px;
+            height: 30px;
+            font-size: 16px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: background 0.3s ease;
+        }
+
+        .close-btn:hover {
+            background: #fc913a;
+        }
+
+        .blurred {
+            filter: blur(5px);
+            pointer-events: none;
+        }
+
+        @media (max-width: 768px) {
+            .introduction {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            .intro-text {
+                max-width: 100%;
+                margin-bottom: 20px;
+            }
+
+            .intro-image {
+                width: 100%;
+            }
+
+            .picture-card {
+                width: 90%;
+                max-width: none;
+                flex-direction: column;
+            }
+
+            .text-content {
+                max-width: 100%;
+                text-align: center;
+                margin-top: 10px;
+            }
+
+            .picture-card img {
+                max-width: 100%;
+                height: auto;
+            }
+
+            .close-btn {
+                top: 5px;
+                right: 5px;
+                width: 25px;
+                height: 25px;
+                font-size: 14px;
+            }
+        }
+
+        @media (max-width: 576px) {
+            .introduction h1 {
+                font-size: 1.5rem;
+            }
+
+            .introduction p,
+            .extra-info p {
+                font-size: 1rem;
+            }
+
+            .extra-info h2 {
+                font-size: 1.2rem;
+            }
+
+            .clickable-box p {
+                font-size: 1rem;
+            }
+
+            .text-content h2 {
+                font-size: 20px;
+            }
+
+            .text-content p {
+                font-size: 16px;
+            }
+
+            .picture-card {
+               
+                    width: 85%;
+                    max-width: none;
+                    flex-direction: column;
+                }
+
+                .text-content h2 {
+                    font-size: 20px;
+                }
+
+                .close-btn {
+                    top: 5px;
+                    right: 5px;
+                    width: 25px;
+                    height: 25px;
+                    font-size: 14px;
+                }
+            }
+    </style>
+</head>
+
+<body data-bs-spy="scroll" data-bs-target=".navbar" data-bs-offset="51">
+    <div class="container-xxl bg-white p-0">
+        <!-- Spinner Start -->
+        <div id="spinner"
+            class="bg-white position-fixed translate-middle w-100 vh-100 top-50 start-50 d-flex align-items-center justify-content-center">
+            <div class="spinner-grow text-primary" style="width: 3rem; height: 3rem;" role="status">
+                <span class="sr-only">Loading...</span>
+            </div>
+        </div>
+        <!-- Spinner End -->
+
+
+        <!-- Navbar & Hero Start -->
+        <div class="container-xxl position-relative p-0" id="home">
+            <nav class="navbar navbar-expand-lg navbar-light px-4 px-lg-5 py-3 py-lg-0 sticky-top shadow-sm">
+                <a href="" class="navbar-brand p-0">
+                    <h1 class="m-0">Belly Buddy</h1>
+                    <!-- <img src="img/logo.png" alt="Logo"> -->
+                </a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse">
+                    <span class="fa fa-bars"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarCollapse">
+                    <div class="navbar-nav mx-auto py-0">
+                        <a href="/" class="nav-item nav-link">Home</a>
+                        <a href="/start" class="nav-item nav-link">Getting Pregnant</a>
+                        <a href="/week" class="nav-item nav-link">Pregnancy Journey</a>
+                        <a href="/tool" class="nav-item nav-link">Usefull Tools</a>
+                        <a href="/doctor" class="nav-item nav-link">Find Doctors</a>
+                        <a href="/chtbt" class="nav-item nav-link">Our Ai Chatbot</a>
+
+                    </div>
+                </div>
+            </nav>
+
+            <div class="introduction">
+                <div class="intro-text">
+                    <h1>Pregnancy Week by Week</h1>
+                    <p>Pregnancy is an adventure! Let us help you—find pregnancy week-by-week info on baby's
+                        development, pregnancy symptoms week-by-week, and weekly tasks.</p>
+                    <div class="extra-info">
+                        <h2>Baby Development</h2>
+                        <p>Get detailed information on how your baby is growing and changing each week. From tiny cells
+                            to a fully developed baby, learn about the fascinating process of fetal development.</p>
+                        <h2>Mother's Body Changes</h2>
+                        <p>Discover what changes you can expect in your body as your baby grows. Understand the symptoms
+                            and get tips on how to manage them effectively.</p>
+                        <h2>Weekly Tasks</h2>
+                        <p>Stay on track with our weekly tasks and tips to ensure a healthy and happy pregnancy. From
+                            prenatal vitamins to preparing the nursery, we've got you covered.</p>
+                    </div>
+                </div>
+                <div class="intro-image">
+                    <img src="{{ url_for('static', filename='img/week.png') }}" alt="Pregnancy">
+                </div>
+            </div>
+
+
+        </div>
+        <!-- Navbar & Hero End -->
+
+
+
+
+
+        <div class="grid-container">
+            <div class="clickable-box" onclick="togglePictureCard(event, 'card1')"> <img
+                    src="{{ url_for('static', filename='img/baby-10.png') }}" alt="pic 1">
+                <p>Week 1-4</p>
+            </div>
+            <div class="clickable-box" onclick="togglePictureCard(event, 'card2')"> <img
+                    src="{{ url_for('static', filename='img/baby-11.png') }}" alt="pic 2">
+                <p>Week 5-8</p>
+            </div>
+            <div class="clickable-box" onclick="togglePictureCard(event, 'card3')"> <img
+                    src="{{ url_for('static', filename='img/baby-12.png') }}" alt="pic 3">
+                <p>Week 9-12</p>
+            </div>
+            <div class="clickable-box" onclick="togglePictureCard(event, 'card4')"> <img
+                    src="{{ url_for('static', filename='img/baby-13.png') }}" alt="pic 4">
+                <p>Week 13-16</p>
+            </div>
+            <div class="clickable-box" onclick="togglePictureCard(event, 'card5')"> <img
+                    src="{{ url_for('static', filename='img/baby-14.png') }}" alt="pic 5">
+                <p>Week 17-20</p>
+            </div>
+            <div class="clickable-box" onclick="togglePictureCard(event, 'card6')"> <img
+                    src="{{ url_for('static', filename='img/baby-15.png') }}" alt="pic 6">
+                <p>Week 21-24</p>
+            </div>
+            <div class="clickable-box" onclick="togglePictureCard(event, 'card7')"> <img
+                    src="{{ url_for('static', filename='img/baby-15.png') }}" alt="pic 7">
+                <p>Week 25-28</p>
+            </div>
+            <div class="clickable-box" onclick="togglePictureCard(event, 'card8')"> <img
+                    src="{{ url_for('static', filename='img/baby-17.png') }}" alt="pic 8">
+                <p>Week 29-32</p>
+            </div>
+            <div class="clickable-box" onclick="togglePictureCard(event, 'card9')"> <img
+                    src="{{ url_for('static', filename='img/baby-18.png') }}" alt="pic 9">
+                <p>Week 33-36</p>
+            </div>
+        </div>
+
+        <div id="card1" class="picture-card">
+            <button class="close-btn" onclick="togglePictureCard(event, 'card1')">&times;</button>
+            <div class="text-content">
+                <h2>Week 1-4</h2>
+                <p>In the first four weeks, the fertilized egg implants itself into the uterine wall. By week four, the
+                    embryo is about the size of a poppy seed, approximately 0.1 cm (0.04 inches). The baby's neural
+                    tube, which will develop into the brain and spinal cord, starts to form. The mother may begin to
+                    feel early pregnancy symptoms such as fatigue, nausea, and breast tenderness.</p>
+            </div>
+
+            <img src="{{ url_for('static', filename='img/clcpic.png') }}" alt="Picture 1">
+        </div>
+        <div id="card2" class="picture-card">
+            <button class="close-btn" onclick="togglePictureCard(event, 'card2')">&times;</button>
+            <div class="text-content">
+                <h2>Week 5-8</h2>
+                <p>By the end of week eight, the baby is about the size of a raspberry, around 1.3 cm (0.5 inches). The
+                    heart has formed and is beating at a regular rhythm. Arms and legs are beginning to develop, and the
+                    baby’s facial features start to become more defined. The mother may continue to experience pregnancy
+                    symptoms and should maintain a healthy diet and hydration.</p>
+            </div>
+
+            <img src="{{ url_for('static', filename='img/clcpic_1.png') }}" alt="Picture 2">
+        </div>
+        <div id="card3" class="picture-card">
+            <button class="close-btn" onclick="togglePictureCard(event, 'card3')">&times;</button>
+            <div class="text-content">
+                <h2>Week 9-12</h2>
+                <p>During weeks nine to twelve, the baby is about the size of a lime, approximately 5.4 cm (2.1 inches).
+                    Vital organs are developing rapidly, and the baby's fingers and toes are no longer webbed. The
+                    mother’s uterus is growing, and she may begin to show a small baby bump. Morning sickness may still
+                    be present but usually starts to ease by the end of the first trimester.</p>
+            </div>
+            <img src="{{ url_for('static', filename='img/clcpic_2.png') }}" alt="Picture 3">
+        </div>
+        <div id="card4" class="picture-card">
+            <button class="close-btn" onclick="togglePictureCard(event, 'card4')">&times;</button>
+            <div class="text-content">
+                <h2>Week 13-16</h2>
+                <p>By week sixteen, the baby is approximately the size of an avocado, around 11.6 cm (4.6 inches). The
+                    baby’s skeleton is starting to harden, and movements may be more noticeable. The mother’s energy
+                    levels might improve, and the risk of miscarriage significantly decreases. This is a good time to
+                    start thinking about prenatal vitamins and healthcare checkups.</p>
+            </div>
+            <img src="{{ url_for('static', filename='img/clcpic_3.png') }}" alt="Picture 4">
+        </div>
+        <div id="card5" class="picture-card">
+            <button class="close-btn" onclick="togglePictureCard(event, 'card5')">&times;</button>
+            <div class="text-content">
+                <h2>Week 17-20</h2>
+                <p>At this stage, the baby is about the size of a banana, approximately 15.3 cm (6 inches). The baby’s
+                    hearing is developing, and they may start to hear the mother’s heartbeat and voice. The mother might
+                    start feeling the baby’s movements, often referred to as "quickening". The baby’s sex can often be
+                    determined by an ultrasound at this time.</p>
+            </div>
+            <img src="{{ url_for('static', filename='img/clcpic_4.png') }}" alt="Picture 5">
+        </div>
+        <div id="card6" class="picture-card">
+            <button class="close-btn" onclick="togglePictureCard(event, 'card6')">&times;</button>
+            <div class="text-content">
+                <h2>Week 21-24</h2>
+                <p>By week twenty-four, the baby is about the size of an ear of corn, around 30 cm (12 inches). The
+                    baby’s facial features are becoming more defined, and they are gaining more muscle and fat. The
+                    mother might experience Braxton Hicks contractions, which are normal but can be uncomfortable. It’s
+                    essential to stay hydrated and maintain a healthy diet.</p>
+            </div>
+            <img src="{{ url_for('static', filename='img/clcpic_5.png') }}" alt="Picture 6">
+        </div>
+        <div id="card7" class="picture-card">
+            <button class="close-btn" onclick="togglePictureCard(event, 'card7')">&times;</button>
+            <div class="text-content">
+                <h2>Week 25-28</h2>
+                <p>The baby is now about the size of a cauliflower, approximately 37.6 cm (14.8 inches). The baby’s
+                    lungs are developing, and they can start to practice breathing by inhaling and exhaling amniotic
+                    fluid. The mother may experience back pain and swelling as the baby continues to grow. It’s a good
+                    time to start thinking about childbirth classes and preparing for the baby's arrival.</p>
+            </div>
+            > <img src="{{ url_for('static', filename='img/clcpic_6.png') }}" alt="Picture 7">
+        </div>
+        <div id="card8" class="picture-card">
+            <button class="close-btn" onclick="togglePictureCard(event, 'card8')">&times;</button>
+            <div class="text-content">
+                <h2>Week 29-32</h2>
+                <p>During weeks twenty-nine to thirty-two, the baby is about the size of a butternut squash, around 41
+                    cm (16.2 inches). The baby’s eyes can open and close, and they can sense light. The mother may
+                    experience increased fatigue and Braxton Hicks contractions. It’s important to get plenty of rest
+                    and support from family and friends.</p>
+            </div>
+
+            <img src="{{ url_for('static', filename='img/clcpic_7.png') }}" alt="Picture 8">
+        </div>
+        <div id="card9" class="picture-card">
+            <button class="close-btn" onclick="togglePictureCard(event, 'card9')">&times;</button>
+            <div class="text-content">
+                <h2>Week 33-40</h2>
+                <p>By the end of week thirty-six, the baby is about the size of a honeydew melon, approximately 46 cm
+                    (18 inches). The baby is gaining weight rapidly and getting ready for birth. The mother might notice
+                    a drop in the baby’s position as they prepare for delivery. Regular prenatal visits are crucial
+                    during this time to monitor the baby’s development and the mother’s health.</p>
+            </div>
+            <img src="{{ url_for('static', filename='img/clcpic_8.png') }}" alt="Picture 9">
+        </div>
+
+
+
+
+        <!-- Footer Start -->
+        <div class="container-fluid bg-primary text-light footer wow fadeIn" data-wow-delay="0.1s"
+            style="visibility: visible; animation-delay: 0.1s; animation-name: fadeIn;">
+            <div class="container py-5 px-lg-5">
+                <div class="row g-5">
+                    <div class="col-md-6 col-lg-3">
+                        <h4 class="text-white mb-4">Give Your Feedback</h4>
+                        <p><i class="fa fa-map-marker-alt me-3"></i>Dhaka, Bangladesh</p>
+                        <p><i class="fa fa-phone-alt me-3"></i>+012 345 67890</p>
+                        <p><i class="fa fa-envelope me-3"></i>ilora.lamisa@gmail.com</p>
+                        <div class="d-flex pt-2">
+                            <a class="btn btn-outline-light btn-social" href=""><i class="fab fa-facebook-f"></i></a>
+                            <a class="btn btn-outline-light btn-social" href=""><i class="fab fa-github-square"></i></a>
+                            <a class="btn btn-outline-light btn-social" href=""><i class="fab fa-linkedin-in"></i></a>
+                        </div>
+                    </div>
+
+
+                </div>
+            </div>
+            <div class="container px-lg-5">
+                <div class="copyright">
+                    <div class="row">
+
+
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Footer End -->
+
+
+        <!-- chatbot -->
+        <div class="chatBot">
+            <div class="chatBotHeading">
+                <label for="chatTextBox" id="chatOpenTrigger" class=""><img
+                    src="{{ url_for('static', filename='img/chaticon.png') }}" alt="Send" srcset=""></button>
+            </div>
+            <hr class="">
+            <div class="chatBody">
+                <div class="chatSession">
+                </div>
+            </div>
+            <form class="chatForm" autocomplete="off">
+                <div class="typingArea">
+                    <textarea name="chatInput" id="chatTextBox" class="textArea"
+                        onblur="if(!validateMessage()) this.value = 'Type here...'"
+                        onfocus="if(!validateMessage()) this.value = ''"></textarea>
+                    <button type="submit" class="sendButton" id="sendButton"><img
+                        src="{{ url_for('static', filename='img/send.svg') }}" alt="Send" srcset=""></button>
+                </div>
+                <button type="button" id="chatCloseTrigger">Close Chat!</button>
+            </form>
+        </div>
+        <script src="{{ url_for('static', filename='js/chatBotConversation.js') }}"></script>
+        <script src="{{ url_for('static', filename='js/chatBotValidate.js') }}"></script>
+        <script src="{{ url_for('static', filename='js/chatBotAnimate.js') }}"></script>
+
+    </div>
+
+    <!-- JavaScript Libraries -->
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="{{ url_for('static', filename='lib/wow/wow.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='lib/easing/easing.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='lib/waypoints/waypoints.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='lib/counterup/counterup.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='lib/owlcarousel/owl.carousel.min.js') }}"></script>
+
+    <!-- Template Javascript -->
+    <script src="{{ url_for('static', filename='js/main.js') }} "></script>
+    <script>
+        function togglePictureCard(event, cardId) {
+            event.preventDefault();
+            const pictureCard = document.getElementById(cardId);
+            const gridContainer = document.querySelector('.grid-container');
+            if (pictureCard.classList.contains('show')) {
+                pictureCard.classList.remove('show');
+                pictureCard.classList.add('hide');
+                gridContainer.classList.remove('blurred');
+                setTimeout(() => {
+                    pictureCard.style.display = 'none';
+                }, 1000);
+
+            } else {
+                pictureCard.style.display = 'flex';
+                setTimeout(() => {
+                    pictureCard.classList.remove('hide');
+                    pictureCard.classList.add('show');
+                }, 10);
+
+                gridContainer.classList.add('blurred');
+            }
+        }
+    </script>
+
+</body>
+
+</html>
