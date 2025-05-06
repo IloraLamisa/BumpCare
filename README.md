@@ -14,6 +14,16 @@
 - 📈 **High Resolution Rates** ensuring user satisfaction and engagement
 - 🔄 **Scalable Architecture** for future enhancements
 
+## 📸 Screenshots
+
+### Main UI
+
+![homepage](https://github.com/user-attachments/assets/b8e53d21-6041-49a2-b56e-23eec9311cd4)
+![Screenshot 2024-12-29 130149](https://github.com/user-attachments/assets/f2cfcce4-3be3-4593-808b-ebc720ba0ddc)
+![Screenshot 2024-12-29![Screenshot 2024-12-29 130224](https://github.com/user-attachments/assets/688992fe-6d76-442c-972e-513dac5f89f7)
+ 041037](https://github.com/user-attachments/assets/78bf671f-4f6c-4acf-8f70-84db40bf7a32)
+
+
 ## 🚀 Future Enhancements
 
 - 🌍 Multi-language support
